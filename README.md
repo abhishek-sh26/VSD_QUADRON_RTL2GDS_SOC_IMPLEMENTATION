@@ -9,21 +9,21 @@ Initial step to my workshop on RTL to GDSII flow using OpenLane and Sky130 PDK. 
 
 
 # **Introduction**
-what is RTL2GDS?
+## **what is RTL2GDS?**
 RTL-to-GDS is the complete VLSI design lifecycle that transforms a high-level digital description into a manufacturable physical layout.
 <img width="812" height="467" alt="RTL2GDS flow" src="https://github.com/user-attachments/assets/c90b3edf-0191-4064-97c7-dd83d1ece8b9" />
 
-**The flow includes** 
+### **The flow includes** 
 . Synthesis
 . Floorplan
 . Placement
 . CTS
 . Routing
 
-#**what is openlane?**
+# **what is openlane?**
 OpenLane is an open-source ASIC design flow that automates the RTL to GDSII process using Sky130 PDK. It provides an easy way to perform synthesis, floorplanning, placement, routing, and timing analysis.
 
-#**Tools used by openlane**
+# **Tools used by openlane**
 Yosys    : synthesis of RTL
 ABC      : mapping netlist
 Magic    : layout
@@ -32,29 +32,29 @@ OpenSTA  : Static timing analysis
 OpenROAD : Floorplanning,Placement,CTS and routing
 
 
-#**open lane flow**
+# **open lane flow**
 <img width="1032" height="731" alt="Openlane flow" src="https://github.com/user-attachments/assets/70e08f67-2f8e-47f3-8ffc-d5233afc523b" />
 
-#**What is Sky130 PDK?**
+# **What is Sky130 PDK?**
 Sky130 is an open-source Process Design Kit (PDK) provided by Google and SkyWater. It contains all the required files to design and manufacture ICs at 130nm technology node.
 
-**It includes:**
+## **It includes:**
 .Standard cell libraries
 .Design rules (DRC)
 .Layout vs schematic rules (LVS)
 .SPICE models
 
-#**invoking openlane**
+# **invoking openlane**
 <img width="1182" height="334" alt="openlane tool invoke " src="https://github.com/user-attachments/assets/7e33f8ad-0d6c-4c46-9a3b-ad51b1b3e402" />
 
-#once after invoking the openlane the tool is ready to perform and the 3 main steps should be followed every time to invoke the tool
+## once after invoking the openlane the tool is ready to perform and the 3 main steps should be followed every time to invoke the tool
 
 .openlane                      : navigates to openlane directory.
 .make mount                    : Mounts your current OpenLane directory into the container. (without this openlane cannot be accessed)
 ../flow.tcl -interactive       : Runs a TCL script (flow.tcl) step-by-step control instead of running everything automatically.
 .package require openlane 0.9  : TCL checks if OpenLane package is available, It activates OpenLane commands inside the TCL shell
 
-#**next step start preparing design** 
+## **next step start preparing design** 
 .prep -design picorv32a        :Initializes design environment
                               -Loads RTL files
                               -Loads config (config.tcl)
@@ -62,7 +62,7 @@ Sky130 is an open-source Process Design Kit (PDK) provided by Google and SkyWate
                               -Creates a runs/ directory
 <img width="977" height="237" alt="prep -design" src="https://github.com/user-attachments/assets/cff4095c-34ae-4f91-b4e3-c1837e53336f" />
 
-.run_synthesis                :Converts RTL → Gate-level netlist
+# .run_synthesis                :Converts RTL → Gate-level netlist
                               -Uses Yosys
                               -Maps logic to standard cells (Sky130)
 <img width="1176" height="153" alt="synthesis run" src="https://github.com/user-attachments/assets/e8467a18-194f-46b5-bc30-8d035c076ca5" />
@@ -92,7 +92,7 @@ replace_cell <instance> high_drive_strength_buffer /repeator
 
 
 
-.run_floorplan                :Defines chip layout structure
+# .run_floorplan                :Defines chip layout structure
                               -Sets die area & core area
                               -Places IO pins
                               -Defines utilization
@@ -118,7 +118,7 @@ after running lef and def file the layout is ready to
 
 
 
-.run_placement            :Places standard cells inside the core  
+# .run_placement            :Places standard cells inside the core  
                           -Global placement
                           -Detailed placement
                           -Optimization for timing
@@ -147,7 +147,7 @@ Output:
 
 
 
-.run_cts     :Builds clock distribution network and ensures clock reaches all flip-flops properly 
+# .run_cts     :Builds clock distribution network and ensures clock reaches all flip-flops properly 
              -inserts clock buffers
              -Balances clock delay (skew)
 <img width="1144" height="97" alt="cts run" src="https://github.com/user-attachments/assets/f0791ec2-f6cd-4164-a66e-b8c677c956c7" />
