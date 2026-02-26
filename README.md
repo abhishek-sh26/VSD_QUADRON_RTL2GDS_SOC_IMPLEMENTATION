@@ -1,4 +1,4 @@
-#VSD_QUADRON_RTL2GDS_SOC_IMPLEMENTATION
+# VSD_QUADRON_RTL2GDS_SOC_IMPLEMENTATION
 Week 1 Learning – RTL2GDS using OpenLane & Sky130
 Initial step to my workshop on RTL to GDSII flow using OpenLane and Sky130 PDK. It includes both theoretical understanding and hands-on implementation.
 
@@ -8,7 +8,7 @@ Initial step to my workshop on RTL to GDSII flow using OpenLane and Sky130 PDK. 
 - Executed flow using GitHub Codespaces
 
 
-> [!TIP] **Introduction**
+# **Introduction**
 what is RTL2GDS?
 RTL-to-GDS is the complete VLSI design lifecycle that transforms a high-level digital description into a manufacturable physical layout.
 <img width="812" height="467" alt="RTL2GDS flow" src="https://github.com/user-attachments/assets/c90b3edf-0191-4064-97c7-dd83d1ece8b9" />
