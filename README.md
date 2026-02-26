@@ -113,7 +113,8 @@ if the timing is violating in any instance change in drive strength og buffer fo
 
 
 
-# 🔥 **run_floorplan **                  : Defines chip layout structure
+# 🔥 **run_floorplan**                  : Defines chip layout structure
+
                               -Sets die area & core area
                               -Places IO pins
                               -Defines utilization
