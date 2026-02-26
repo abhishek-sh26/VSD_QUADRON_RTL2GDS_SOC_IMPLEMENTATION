@@ -1,5 +1,5 @@
 # VSD_QUADRON_RTL2GDS_SOC_IMPLEMENTATION
-# Week 1 Learning – RTL2GDS using OpenLane & Sky130
+# 🚀 Week 1 Learning – RTL2GDS using OpenLane & Sky130
 ## Initial step to my workshop on RTL to GDSII flow using OpenLane and Sky130 PDK. It includes both theoretical understanding and hands-on implementation.
 
 - Implemented full RTL → GDS flow
