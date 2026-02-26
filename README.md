@@ -79,6 +79,11 @@ set ::env(SYNTH_BUFFERING) 1
 set ::env(SYNTH_MAX_FANOUT) 4
 **rerun synthesis to take effect**
 
+**To reduce slack and meet timing ECO fixing** 
+replace_cell <instance> high_drive_strength_buffer /repeator
+> Buffer list sky130_fd_sc_hd__clkbuf_1 , sky130_fd_sc_hd__clkbuf_2 , sky130_fd_sc_hd__clkbuf_4 , sky130_fd_sc_hd__clkbuf_8
+> if the timing is violating in any instance change in drive strength og buffer for that instance with high buffer
+
 
 
 .run_floorplan                :Defines chip layout structure
