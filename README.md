@@ -52,13 +52,13 @@ Sky130 is an open-source Process Design Kit (PDK) provided by Google and SkyWate
 
 ## once after invoking the openlane the tool is ready to perform and the 4 main steps should be followed every time to invoke the tool
 
-###  **openlane**                      : **navigates to openlane directory**.
-###  **make mount**                    : **Mounts your current OpenLane directory into the container. (without this openlane cannot be accessed)**
-###  **./flow.tcl -interactive**       : **Runs a TCL script (flow.tcl) step-by-step control instead of running everything automatically.**
-###  **package require openlane 0.9**  : **TCL checks if OpenLane package is available, It activates OpenLane commands inside the TCL shell**
+- **openlane**                      : navigates to openlane directory.
+- **make mount**                    : Mounts your current OpenLane directory into the container. (without this openlane cannot be accessed)**
+- **./flow.tcl -interactive**       : Runs a TCL script (flow.tcl) step-by-step control instead of running everything automatically.**
+- **package require openlane 0.9**  : TCL checks if OpenLane package is available, It activates OpenLane commands inside the TCL shell**
 
 ## **next step start preparing design** 
-###  **prep -design picorv32a**        :Initializes design environment
+###  **prep -design picorv32a**        : Initializes design environment
                               -Loads RTL files
                               -Loads config (config.tcl)
                               -Sets environment variables
@@ -66,7 +66,7 @@ Sky130 is an open-source Process Design Kit (PDK) provided by Google and SkyWate
   
 <img width="977" height="237" alt="prep -design" src="https://github.com/user-attachments/assets/cff4095c-34ae-4f91-b4e3-c1837e53336f" />
 
-# 🔥 **run_synthesis**                 :Converts RTL → Gate-level netlist
+# 🔥 **run_synthesis**                 : Converts RTL → Gate-level netlist
                               -Uses Yosys
                               -Maps logic to standard cells (Sky130)
                               
@@ -109,7 +109,7 @@ if the timing is violating in any instance change in drive strength og buffer fo
 
 
 
-# 🔥 **run_floorplan **               :Defines chip layout structure
+# 🔥 **run_floorplan **                  : Defines chip layout structure
                               -Sets die area & core area
                               -Places IO pins
                               -Defines utilization
@@ -146,7 +146,7 @@ to veiw layout view
 
 
 
-# 🔥 **run_placement**            :Places standard cells inside the core  
+# 🔥 **run_placement**                     : Places standard cells inside the core  
                           -Global placement
                           -Detailed placement
                           -Optimization for timing
