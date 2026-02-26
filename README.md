@@ -15,22 +15,22 @@ RTL-to-GDS is the complete VLSI design lifecycle that transforms a high-level di
 <img width="812" height="467" alt="RTL2GDS flow" src="https://github.com/user-attachments/assets/c90b3edf-0191-4064-97c7-dd83d1ece8b9" />
 
 ### **The flow includes** 
-. Synthesis
-. Floorplan
-. Placement
-. CTS
-. Routing
+- Synthesis
+- Floorplan
+- Placement
+- CTS
+- Routing
 
 # **what is openlane?**
 OpenLane is an open-source ASIC design flow that automates the RTL to GDSII process using Sky130 PDK. It provides an easy way to perform synthesis, floorplanning, placement, routing, and timing analysis.
 
 # **Tools used by openlane**
-Yosys    : synthesis of RTL
-ABC      : mapping netlist
-Magic    : layout
-Netgen   : SPICE exratraction and simulation
-OpenSTA  : Static timing analysis
-OpenROAD : Floorplanning,Placement,CTS and routing
+- Yosys    : synthesis of RTL
+- ABC      : mapping netlist
+- Magic    : layout
+- Netgen   : SPICE exratraction and simulation
+- OpenSTA  : Static timing analysis
+- OpenROAD : Floorplanning,Placement,CTS and routing
 
 
 # **open lane flow**
@@ -93,16 +93,18 @@ Output:
 
 **some synthesis strategy to modify**
 
-set ::env(SYNTH_STRATEGY) 1
-set ::env(SYNTH_SIZING) 1
-set ::env(SYNTH_BUFFERING) 1
-set ::env(SYNTH_MAX_FANOUT) 4
+- set ::env(SYNTH_STRATEGY) 1
+- set ::env(SYNTH_SIZING) 1
+- set ::env(SYNTH_BUFFERING) 1
+- set ::env(SYNTH_MAX_FANOUT) 4
 **rerun synthesis to take effect**
 
 **To reduce slack and meet timing ECO fixing** 
 replace_cell <instance> high_drive_strength_buffer /repeator
-> Buffer list sky130_fd_sc_hd__clkbuf_1 , sky130_fd_sc_hd__clkbuf_2 , sky130_fd_sc_hd__clkbuf_4 , sky130_fd_sc_hd__clkbuf_8
-> if the timing is violating in any instance change in drive strength og buffer for that instance with high buffer
+## Buffer list :
+> sky130_fd_sc_hd__clkbuf_1 , sky130_fd_sc_hd__clkbuf_2 , sky130_fd_sc_hd__clkbuf_4 , sky130_fd_sc_hd__clkbuf_8
+
+if the timing is violating in any instance change in drive strength og buffer for that instance with high buffer
 
 
 
@@ -113,29 +115,29 @@ replace_cell <instance> high_drive_strength_buffer /repeator
                               
   <img width="1035" height="182" alt="floorplan-run" src="https://github.com/user-attachments/assets/f3921ba2-5b7f-4ade-82ea-db9dfe629d4a" />
   
-core utilization 50%
-aspect ratio (height/width) 1
-shape Rectangle
+- core utilization 50%
+- aspect ratio (height/width) 1
+- shape Rectangle
 
-Output:
-Floorplan DEF file
-**Layout view**
+# Output:
+- Floorplan DEF file
+## **Layout view**
 to veiw layout view 
-1). go to port section in 6080 port click on globe symbol it will opens vnc window 
+### go to port section in 6080 port click on globe symbol it will opens vnc window 
 
 <img width="1232" height="230" alt="port_selection" src="https://github.com/user-attachments/assets/00c56023-6a00-44df-bd91-9947920a7c03" />
 
-2). open terminal and type commands 
+### open terminal and type commands 
 
 <img width="1280" height="267" alt="layout launch" src="https://github.com/user-attachments/assets/83955c55-c1d3-4530-b486-d048546cd4a4" />
 
-3). it will opens tkcon window and layout veiw window read the lef and def files in the tkcon window
+### it will opens tkcon window and layout veiw window read the lef and def files in the tkcon window
 
 <img width="855" height="512" alt="lef read" src="https://github.com/user-attachments/assets/9eb69531-8172-4e3f-a2b7-ccc108ddbee9" />
 
 <img width="480" height="185" alt="fp def read" src="https://github.com/user-attachments/assets/47d1d088-613e-414c-9dfd-b7624de2ee04" />
 
-after running lef and def file the layout is ready to
+###after running lef and def file the layout is ready to
 
 # **Final layout of floorplan**
 
@@ -151,31 +153,31 @@ after running lef and def file the layout is ready to
 <img width="1063" height="244" alt="placement run" src="https://github.com/user-attachments/assets/02dc2e67-c97e-4bbc-9374-c96988f0ed24" />
 
 
-Output:
-.Placement DEF
-.Congestion info
-.layout
-** to view layout **
-1). in the same vnc window change the directory from floorplan to placement and type command 
+# Output:
+- Placement DEF
+- Congestion info
+- layout
+## **to view layout**
+- in the same vnc window change the directory from floorplan to placement and type command 
 
 <img width="1270" height="230" alt="placement layout view command " src="https://github.com/user-attachments/assets/a5f96643-edce-428a-addb-63789e4d9b91" />
 
-2). it will opens tkcon window and layout veiw window read the lef and def files in the tkcon window
+- it will opens tkcon window and layout veiw window read the lef and def files in the tkcon window
 
 <img width="797" height="513" alt="placement lef" src="https://github.com/user-attachments/assets/4e6f3966-54ea-4f03-9e2f-50c8ff15a721" />
 
 <img width="391" height="152" alt="placement def" src="https://github.com/user-attachments/assets/b377d67f-bdf3-4588-bc4c-e9775b534adb" />
 
-**3).final layout view** 
+## **3).final layout view** 
 
 <img width="1245" height="698" alt="Screenshot 2026-02-24 at 2 03 05 PM" src="https://github.com/user-attachments/assets/ac15a84f-7a0e-486b-b230-2b96cbd2b137" />
 
-**layout view of how std cells are actually placed**
+## **layout view of how std cells are actually placed**
 
 <img width="1246" height="694" alt="Screenshot 2026-02-24 at 2 13 11 PM" src="https://github.com/user-attachments/assets/d3899686-cfe8-4f4e-8e21-2b3661f26870" />
 
 
-.timing info after placement 
+- timing info after placement 
 
 <img width="688" height="567" alt="placement timing report" src="https://github.com/user-attachments/assets/3e5e243a-b889-4137-915b-9f592d4ee86e" />
 
@@ -189,14 +191,14 @@ Output:
 
 
 # CTS Report Contains:
-.Clock Skew                    :Difference in clock arrival time
+- Clock Skew                    :Difference in clock arrival time
                                -Skew = Max delay - Min delay
                                -Smaller skew = better design
-.Clock Latency                 :Time taken for clock to reach flip-flops
-.Number of Buffers Inserted    :Shows how many buffers were added
+- Clock Latency                 :Time taken for clock to reach flip-flops
+- Number of Buffers Inserted    :Shows how many buffers were added
 > Buffer list sky130_fd_sc_hd__clkbuf_1 , sky130_fd_sc_hd__clkbuf_2 , sky130_fd_sc_hd__clkbuf_4 , sky130_fd_sc_hd__clkbuf_8
-.Transition/Slew               :Signal rise/fall quality
-.Timing Report (Post-CTS)      :Updated setup & hold timing
+- Transition/Slew               :Signal rise/fall quality
+- Timing Report (Post-CTS)      :Updated setup & hold timing
 
 <img width="695" height="565" alt="cts timing report" src="https://github.com/user-attachments/assets/fe124d9d-a6b9-4a37-a949-a1befa894625" />
 
