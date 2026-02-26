@@ -52,13 +52,13 @@ Sky130 is an open-source Process Design Kit (PDK) provided by Google and SkyWate
 
 ## once after invoking the openlane the tool is ready to perform and the 3 main steps should be followed every time to invoke the tool
 
-- openlane                      : navigates to openlane directory.
-- make mount                    : Mounts your current OpenLane directory into the container. (without this openlane cannot be accessed)
-- ./flow.tcl -interactive       : Runs a TCL script (flow.tcl) step-by-step control instead of running everything automatically.
-- package require openlane 0.9  : TCL checks if OpenLane package is available, It activates OpenLane commands inside the TCL shell
+### - openlane                      : navigates to openlane directory.
+### - make mount                    : Mounts your current OpenLane directory into the container. (without this openlane cannot be accessed)
+### - ./flow.tcl -interactive       : Runs a TCL script (flow.tcl) step-by-step control instead of running everything automatically.
+### - package require openlane 0.9  : TCL checks if OpenLane package is available, It activates OpenLane commands inside the TCL shell
 
 ## **next step start preparing design** 
-- prep -design picorv32a        :Initializes design environment
+### - prep -design picorv32a        :Initializes design environment
                               -Loads RTL files
                               -Loads config (config.tcl)
                               -Sets environment variables
@@ -66,7 +66,7 @@ Sky130 is an open-source Process Design Kit (PDK) provided by Google and SkyWate
   
 <img width="977" height="237" alt="prep -design" src="https://github.com/user-attachments/assets/cff4095c-34ae-4f91-b4e3-c1837e53336f" />
 
-# .run_synthesis                :Converts RTL → Gate-level netlist
+# .run_synthesis                 :Converts RTL → Gate-level netlist
                               -Uses Yosys
                               -Maps logic to standard cells (Sky130)
                               
@@ -91,7 +91,7 @@ Output:
 
    <img width="860" height="360" alt="synth power report" src="https://github.com/user-attachments/assets/51e10566-9d46-4fc0-8aaf-eeb2363d6001" />
 
-**some synthesis strategy to modify**
+## **some synthesis strategy to modify**
 
 - set ::env(SYNTH_STRATEGY) 1
 - set ::env(SYNTH_SIZING) 1
