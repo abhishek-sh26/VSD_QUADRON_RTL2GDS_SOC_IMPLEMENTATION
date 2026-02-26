@@ -61,7 +61,8 @@ Sky130 is an open-source Process Design Kit (PDK) provided by Google and SkyWate
 - **package require openlane 0.9**  : TCL checks if OpenLane package is available, It activates OpenLane commands inside the TCL shell
 
 ## **next step start preparing design** 
-###  **prep -design picorv32a**        : Initializes design environment
+-  **prep -design picorv32a**        : Initializes design environment
+  
                               -Loads RTL files
                               -Loads config (config.tcl)
                               -Sets environment variables
