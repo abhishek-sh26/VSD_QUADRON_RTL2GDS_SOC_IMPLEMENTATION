@@ -12,7 +12,7 @@
 ## 🔹 **what is RTL2GDS?**
 RTL-to-GDS is the complete VLSI design lifecycle that transforms a high-level digital description into a manufacturable physical layout.
 
-<img width="812" height="467" alt="RTL2GDS flow" src="https://github.com/user-attachments/assets/c90b3edf-0191-4064-97c7-dd83d1ece8b9" />
+# <img width="812" height="467" alt="RTL2GDS flow" src="https://github.com/user-attachments/assets/c90b3edf-0191-4064-97c7-dd83d1ece8b9" />
 
 ### **The flow includes** 
 - Synthesis
@@ -72,9 +72,10 @@ Sky130 is an open-source Process Design Kit (PDK) provided by Google and SkyWate
                               
 <img width="1176" height="153" alt="synthesis run" src="https://github.com/user-attachments/assets/e8467a18-194f-46b5-bc30-8d035c076ca5" />
 
-Output:
+## Output:
 
 - Netlist (.v)
+  
   <img width="865" height="529" alt="gate netlist 1" src="https://github.com/user-attachments/assets/1a67a600-e6b4-4889-895d-7e1e5a08c604" />
 
   <img width="278" height="620" alt="gate netlist 2" src="https://github.com/user-attachments/assets/13c2d8fc-aefe-42a2-a022-d84d8a1e9c26" />
