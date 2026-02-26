@@ -39,23 +39,23 @@ OpenROAD : Floorplanning,Placement,CTS and routing
 Sky130 is an open-source Process Design Kit (PDK) provided by Google and SkyWater. It contains all the required files to design and manufacture ICs at 130nm technology node.
 
 ## **It includes:**
-.Standard cell libraries
-.Design rules (DRC)
-.Layout vs schematic rules (LVS)
-.SPICE models
+- Standard cell libraries
+- Design rules (DRC)
+- Layout vs schematic rules (LVS)
+- SPICE models
 
 # **invoking openlane**
 <img width="1182" height="334" alt="openlane tool invoke " src="https://github.com/user-attachments/assets/7e33f8ad-0d6c-4c46-9a3b-ad51b1b3e402" />
 
 ## once after invoking the openlane the tool is ready to perform and the 3 main steps should be followed every time to invoke the tool
 
-.openlane                      : navigates to openlane directory.
-.make mount                    : Mounts your current OpenLane directory into the container. (without this openlane cannot be accessed)
-../flow.tcl -interactive       : Runs a TCL script (flow.tcl) step-by-step control instead of running everything automatically.
-.package require openlane 0.9  : TCL checks if OpenLane package is available, It activates OpenLane commands inside the TCL shell
+- openlane                      : navigates to openlane directory.
+- make mount                    : Mounts your current OpenLane directory into the container. (without this openlane cannot be accessed)
+- ./flow.tcl -interactive       : Runs a TCL script (flow.tcl) step-by-step control instead of running everything automatically.
+- package require openlane 0.9  : TCL checks if OpenLane package is available, It activates OpenLane commands inside the TCL shell
 
 ## **next step start preparing design** 
-.prep -design picorv32a        :Initializes design environment
+- prep -design picorv32a        :Initializes design environment
                               -Loads RTL files
                               -Loads config (config.tcl)
                               -Sets environment variables
@@ -68,14 +68,14 @@ Sky130 is an open-source Process Design Kit (PDK) provided by Google and SkyWate
 <img width="1176" height="153" alt="synthesis run" src="https://github.com/user-attachments/assets/e8467a18-194f-46b5-bc30-8d035c076ca5" />
 
 Output:
-.Netlist (.v) <img width="865" height="529" alt="gate netlist 1" src="https://github.com/user-attachments/assets/1a67a600-e6b4-4889-895d-7e1e5a08c604" />
+- Netlist (.v) <img width="865" height="529" alt="gate netlist 1" src="https://github.com/user-attachments/assets/1a67a600-e6b4-4889-895d-7e1e5a08c604" />
               <img width="278" height="620" alt="gate netlist 2" src="https://github.com/user-attachments/assets/13c2d8fc-aefe-42a2-a022-d84d8a1e9c26" />
 
-.Area report   <img width="731" height="97" alt="area report" src="https://github.com/user-attachments/assets/6cb4e325-7ced-4656-8c84-97733e739a56" />
+- Area report   <img width="731" height="97" alt="area report" src="https://github.com/user-attachments/assets/6cb4e325-7ced-4656-8c84-97733e739a56" />
 
-.Timing report <img width="759" height="583" alt="synth timing report" src="https://github.com/user-attachments/assets/8fd5db51-871a-4767-8b7d-cad2b4683a37" />
+- Timing report <img width="759" height="583" alt="synth timing report" src="https://github.com/user-attachments/assets/8fd5db51-871a-4767-8b7d-cad2b4683a37" />
 
-.power report <img width="860" height="360" alt="synth power report" src="https://github.com/user-attachments/assets/51e10566-9d46-4fc0-8aaf-eeb2363d6001" />
+- power report <img width="860" height="360" alt="synth power report" src="https://github.com/user-attachments/assets/51e10566-9d46-4fc0-8aaf-eeb2363d6001" />
 
 **some synthesis strategy to modify**
 
