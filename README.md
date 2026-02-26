@@ -50,7 +50,7 @@ Sky130 is an open-source Process Design Kit (PDK) provided by Google and SkyWate
 
 <img width="1182" height="334" alt="openlane tool invoke " src="https://github.com/user-attachments/assets/7e33f8ad-0d6c-4c46-9a3b-ad51b1b3e402" />
 
-## once after invoking the openlane the tool is ready to perform and the 3 main steps should be followed every time to invoke the tool
+## once after invoking the openlane the tool is ready to perform and the 4 main steps should be followed every time to invoke the tool
 
 ### - openlane                      : navigates to openlane directory.
 ### - make mount                    : Mounts your current OpenLane directory into the container. (without this openlane cannot be accessed)
@@ -66,7 +66,7 @@ Sky130 is an open-source Process Design Kit (PDK) provided by Google and SkyWate
   
 <img width="977" height="237" alt="prep -design" src="https://github.com/user-attachments/assets/cff4095c-34ae-4f91-b4e3-c1837e53336f" />
 
-# .run_synthesis                 :Converts RTL → Gate-level netlist
+# 🔥 .run_synthesis                 :Converts RTL → Gate-level netlist
                               -Uses Yosys
                               -Maps logic to standard cells (Sky130)
                               
@@ -108,7 +108,7 @@ if the timing is violating in any instance change in drive strength og buffer fo
 
 
 
-# .run_floorplan                :Defines chip layout structure
+# 🔥 .run_floorplan                :Defines chip layout structure
                               -Sets die area & core area
                               -Places IO pins
                               -Defines utilization
@@ -145,7 +145,7 @@ to veiw layout view
 
 
 
-# .run_placement            :Places standard cells inside the core  
+# 🔥 .run_placement            :Places standard cells inside the core  
                           -Global placement
                           -Detailed placement
                           -Optimization for timing
@@ -183,7 +183,7 @@ to veiw layout view
 
 
 
-# .run_cts     :Builds clock distribution network and ensures clock reaches all flip-flops properly 
+# 🔥 .run_cts     :Builds clock distribution network and ensures clock reaches all flip-flops properly 
              -inserts clock buffers
              -Balances clock delay (skew)
              
