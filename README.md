@@ -70,7 +70,8 @@ Sky130 is an open-source Process Design Kit (PDK) provided by Google and SkyWate
   
 > <img width="977" height="237" alt="prep -design" src="https://github.com/user-attachments/assets/cff4095c-34ae-4f91-b4e3-c1837e53336f" />
 
-# 🔥 **run_synthesis**                 : Converts RTL → Gate-level netlist
+# 🔥 **run_synthesis**                 
+  ## Converts RTL → Gate-level netlist
                               -Uses Yosys
                               -Maps logic to standard cells (Sky130)
                               
@@ -113,7 +114,8 @@ if the timing is violating in any instance change in drive strength og buffer fo
 
 
 
-# 🔥 **run_floorplan**                  : Defines chip layout structure
+# 🔥 **run_floorplan**                 
+## Defines chip layout structure
 
                               -Sets die area & core area
                               -Places IO pins
@@ -151,7 +153,8 @@ to veiw layout view
 
 
 
-# 🔥 **run_placement**                     : Places standard cells inside the core  
+# 🔥 **run_placement**                     
+##  Places standard cells inside the core  
                           -Global placement
                           -Detailed placement
                           -Optimization for timing
@@ -189,7 +192,8 @@ to veiw layout view
 
 
 
-# 🔥 **run_cts**     :Builds clock distribution network and ensures clock reaches all flip-flops properly 
+# 🔥 **run_cts**     
+## Builds clock distribution network and ensures clock reaches all flip-flops properly 
              -inserts clock buffers
              -Balances clock delay (skew)
              
