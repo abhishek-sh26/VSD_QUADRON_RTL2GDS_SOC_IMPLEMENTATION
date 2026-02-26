@@ -107,7 +107,7 @@ after running lef and def file the layout is ready to
 
 
 
-.placement 
+.placement  
 
 
 
