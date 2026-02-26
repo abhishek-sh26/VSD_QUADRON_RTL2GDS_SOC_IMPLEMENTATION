@@ -94,7 +94,7 @@ Output:
 Floorplan DEF file
 **Layout view**
 to veiw layout view 
-1). go to port section and select 6080 port it will opens vnc window 
+1). go to port section in 6080 port click on globe symbol it will opens vnc window 
 <img width="1232" height="230" alt="port_selection" src="https://github.com/user-attachments/assets/00c56023-6a00-44df-bd91-9947920a7c03" />
 2). open terminal and type commands 
 <img width="1280" height="267" alt="layout launch" src="https://github.com/user-attachments/assets/83955c55-c1d3-4530-b486-d048546cd4a4" />
@@ -107,7 +107,60 @@ after running lef and def file the layout is ready to
 
 
 
-.placement  
+.run_placement            :Places standard cells inside the core  
+                          -Global placement
+                          -Detailed placement
+                          -Optimization for timing
+<img width="1063" height="244" alt="placement run" src="https://github.com/user-attachments/assets/02dc2e67-c97e-4bbc-9374-c96988f0ed24" />
+
+
+Output:
+.Placement DEF
+.Congestion info
+.layout
+** to view layout **
+1). in the same vnc window change the directory from floorplan to placement and type command 
+<img width="1270" height="230" alt="placement layout view command " src="https://github.com/user-attachments/assets/a5f96643-edce-428a-addb-63789e4d9b91" />
+
+2). it will opens tkcon window and layout veiw window read the lef and def files in the tkcon window
+<img width="797" height="513" alt="placement lef" src="https://github.com/user-attachments/assets/4e6f3966-54ea-4f03-9e2f-50c8ff15a721" />
+<img width="391" height="152" alt="placement def" src="https://github.com/user-attachments/assets/b377d67f-bdf3-4588-bc4c-e9775b534adb" />
+
+**3).final layout view** 
+<img width="1245" height="698" alt="Screenshot 2026-02-24 at 2 03 05 PM" src="https://github.com/user-attachments/assets/ac15a84f-7a0e-486b-b230-2b96cbd2b137" />
+**layout view of how std cells are actually placed**
+<img width="1246" height="694" alt="Screenshot 2026-02-24 at 2 13 11 PM" src="https://github.com/user-attachments/assets/d3899686-cfe8-4f4e-8e21-2b3661f26870" />
+
+.timing info after placement 
+<img width="688" height="567" alt="placement timing report" src="https://github.com/user-attachments/assets/3e5e243a-b889-4137-915b-9f592d4ee86e" />
+
+
+
+.run_cts     :Builds clock distribution network and ensures clock reaches all flip-flops properly 
+             -inserts clock buffers
+             -Balances clock delay (skew)
+<img width="1144" height="97" alt="cts run" src="https://github.com/user-attachments/assets/f0791ec2-f6cd-4164-a66e-b8c677c956c7" />
+
+
+CTS Report Contains:
+.Clock Skew                    :Difference in clock arrival time
+                               -Skew = Max delay - Min delay
+                               -Smaller skew = better design
+.Clock Latency                 :Time taken for clock to reach flip-flops
+.Number of Buffers Inserted    :Shows how many buffers were added
+> Buffer list sky130_fd_sc_hd__clkbuf_1 , sky130_fd_sc_hd__clkbuf_2 , sky130_fd_sc_hd__clkbuf_4 , sky130_fd_sc_hd__clkbuf_8
+.Transition/Slew               :Signal rise/fall quality
+.Timing Report (Post-CTS)      :Updated setup & hold timing
+<img width="695" height="565" alt="cts timing report" src="https://github.com/user-attachments/assets/fe124d9d-a6b9-4a37-a949-a1befa894625" />
+
+<img width="651" height="114" alt="cts report" src="https://github.com/user-attachments/assets/c044cbdd-4dbc-4837-9f62-8ff48074ffc8" />
+
+
+
+
+
+         
+
 
 
 
