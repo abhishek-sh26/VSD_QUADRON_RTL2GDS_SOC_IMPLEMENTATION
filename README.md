@@ -304,6 +304,9 @@ Improper clock tree design can lead to timing violations due to excessive skew o
 ✔ Prepares design for final verification (DRC/LVS)
 
 
+# WEEK 2
+
+
 
 
          
