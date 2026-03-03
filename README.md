@@ -291,6 +291,9 @@ Improper clock tree design can lead to timing violations due to excessive skew o
 ## In OpenLane,routing is done using FastRoute and TritonRoute to connect all nets while satisfying DRC and generating parasitics.
 
 
+<img width="1266" height="697" alt="routing veiw 1" src="https://github.com/user-attachments/assets/ecf03e13-32cc-4739-b213-cec6455926be" />
+
+
 <img width="907" height="727" alt="routing report" src="https://github.com/user-attachments/assets/78168673-1f56-4b3a-9e46-9b44c48919d4" />
 
 
