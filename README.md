@@ -530,6 +530,10 @@ cd vsd-scl180-orfs/orfs/flow
 ## Run the flow RTL2GDS with the make command 
 ### make PLATFORM=sky130hd DESIGN=riscv32i
 
+## make successfully finished 
+<img width="993" height="203" alt="make success logs OR codespace" src="https://github.com/user-attachments/assets/271ba668-d123-4251-91e6-6b91b102bb8c" />
+
+
 ## The final Klayout veiw of the final.gds
 <img width="1034" height="42" alt="Screenshot 2026-03-08 at 11 59 18 PM" src="https://github.com/user-attachments/assets/4f828aad-4214-48aa-aa41-490c06777567" />
 
@@ -538,8 +542,92 @@ cd vsd-scl180-orfs/orfs/flow
 
 
 
-  
 
+</details>
+
+<details>
+<summary><strong>PHASE-5 Debugging and Unix Literacy  </strong></summary>
+
+## 1. ls
+### The ls (list) command is used to display the files and directories present in the current directory. It helps in checking the contents of folders such as designs, logs, reports, and results.
+- Example: ls
+
+## 2. cd
+### The cd (change directory) command is used to move from one directory to another in the file system.
+- Example: cd flow/designs
+
+## 3. pwd
+### The pwd (print working directory) command displays the current directory path. It helps verify the current location in the file system.
+- Example: pwd
+
+## 4. grep
+### The grep command is used to search for specific words or patterns inside files. It is commonly used to identify errors, warnings, or timing violations in log files.
+- Example: grep error log.txt
+
+## 5. find
+### The find command is used to search for files or directories within a specified path. It helps locate log files, reports, or generated outputs in the project directory.
+- Example: find . -name “*.log”
+
+## 6. cat
+### The cat (concatenate) command is used to display the contents of a file directly in the terminal. It is useful for quickly viewing log or configuration files.
+- Example: cat log.txt
+
+## 7. less
+### The less command is used to view large files one page at a time. It allows scrolling through large logs generated during synthesis, placement, or routing stages.
+- Example: less log.txt
+
+## 8. echo
+The echo command prints text or variable values in the terminal. It is useful for displaying messages and debugging scripts.
+- Example: echo RTL to GDS flow running
+
+## 9. export
+The export command is used to set environment variables in the current shell session. It helps configure tool paths so that tools like OpenROAD or Yosys can be executed from any directory.
+- Example: export PATH=$PATH:/usr/local/bin
+
+## 10. Environment Variables
+### Environment variables store configuration values used by the operating system and tools. They help the system locate executables, libraries, and tool installations required for running the RTL-to-GDS flow.
+- Example: echo $PATH
+
+## 1. Navigating Directories
+### Commands such as ls, cd, and pwd were used to navigate through the project directories. These commands help locate important folders such as designs, logs, reports, and results generated during the flow execution.
+
+<img width="1217" height="229" alt="navigating " src="https://github.com/user-attachments/assets/94a645b8-c0b6-4776-b717-b31f5cc39900" />
+
+
+<img width="993" height="203" alt="make success logs OR codespace" src="https://github.com/user-attachments/assets/666cb04d-9fd2-4cfd-be98-e4f90ac509e4" />
+
+
+## 2. Searching Logs
+### Log files generated during the RTL-to-GDS flow were inspected to identify errors and warnings. The grep command was used to search specific keywords inside log files.
+
+<img width="1206" height="308" alt="Screenshot 2026-03-08 at 8 44 49 PM" src="https://github.com/user-attachments/assets/632bd9f0-71f6-4d98-9b4a-c705f434df5c" />
+
+
+## 3. Filtering Timing Violations Using grep
+### Timing reports generated during the flow were analyzed using the grep command to locate timing violations such as slack values.
+
+
+<img width="974" height="323" alt=" slack timimg filtering " src="https://github.com/user-attachments/assets/38c9978d-015f-4919-a21e-54e58f4c97e0" />
+
+## 4. Inspecting Makefiles
+### The Makefile was inspected to understand how the ORFS flow orchestrates different stages such as synthesis, placement, and routing.
+
+### cat Makefile
+
+<img width="857" height="486" alt="cat makefile" src="https://github.com/user-attachments/assets/9388cedb-4f43-472e-836b-5fb3a7d58c98" />
+
+
+
+  
+## Conclusion
+
+### In Week-2, the OpenROAD Flow Scripts (ORFS) were successfully executed in both GitHub Codespaces (cloud environment) and a local Ubuntu machine. This week provided hands-on experience with the complete RTL-to-GDS flow, including synthesis, floorplanning, placement, clock tree synthesis, routing, and final GDS generation.
+
+### The toolchain used in the flow was studied by analyzing the devcontainer configuration, which helped in understanding the role of tools such as OpenROAD, Yosys, OpenSTA, TritonCTS, and FastRoute. The ORFS environment was also replicated locally by installing the required dependencies and building the OpenROAD tool from source.
+
+### Additionally, basic Unix debugging commands such as ls, cd, pwd, grep, find, cat, and less were used to navigate directories, inspect logs, and analyze timing reports. This helped in developing debugging skills required for handling ASIC physical design flows.
+
+### Overall, Week-2 helped build confidence in executing the RTL-to-GDS flow independently, understanding the underlying toolchain, and debugging design flows using Unix commands, which is essential for implementing complete SoC designs in the upcoming weeks.
   
 
 
