@@ -401,6 +401,38 @@ Klayout veiw of final GDS generated in Codespaces
 
 <details>
 <summary><strong>Phase 2 - Devcontainer Toolchain Understanding </strong></summary>
+## **Files analyzed **
+
+                        - .devcontainer/Dockerfile
+                        - .devcontainer/install-openroad.sh
+
+### These files define the complete RTL-to-GDS environment used inside GitHub Codespaces.
+
+Toolchain Mapping (RTL-to-GDS Flow) 
+
+| Tool          | Installed From             | Purpose in Flow                                                                | Stage Used           |
+| ------------- | -------------------------- | ------------------------------------------------------------------------------ | -------------------- |
+| **OpenROAD**  | Built from source (GitHub) | Performs physical design tasks like placement, CTS, routing and GDS generation | Physical Design      |
+| **Yosys**     | Open-source synthesis tool | Converts RTL (Verilog) into gate-level netlist                                 | Synthesis            |
+| **TritonCTS** | Integrated with OpenROAD   | Builds clock distribution network                                              | Clock Tree Synthesis |
+| **FastRoute** | OpenROAD module            | Performs global routing of nets                                                | Routing              |
+| **OpenSTA**   | Integrated in OpenROAD     | Static timing analysis to check setup/hold violations                          | Timing Analysis      |
+| **KLayout**   | Package manager / binary   | Used to visualize layout and GDS files                                         | Layout Viewing       |
+| **Python**    | Package manager            | Used for automation scripts in the flow                                        | Flow Automation      |
+| **Make**      | Linux build tool           | Executes Makefile and automates the ORFS flow                                  | Flow Control         |
+| **Git**       | GitHub                     | Version control and repository management                                      | Development          |
+
+
+
+
+Flow Architecture Explanation
+ORFS (OpenROAD Flow Scripts) automates the complete RTL-to-GDS flow using scripts and Makefiles.
+The Makefile controls and executes each stage of the design flow in the correct order.
+Synthesis is the first stage where RTL (Verilog) is converted into a gate-level netlist using Yosys.
+After synthesis, the physical design stages begin in OpenROAD, including floorplanning, placement, clock tree synthesis (CTS), and routing.
+Timing analysis is performed using OpenSTA to check timing constraints such as WNS and TNS.
+After routing and timing verification, the final GDSII file is generated, which represents the physical layout of the chip ready for fabrication.
+
 
 
          
