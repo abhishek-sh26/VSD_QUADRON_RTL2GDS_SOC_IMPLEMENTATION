@@ -545,7 +545,7 @@ cd yosys
 ### Step 1 — Navigate to ORFS flow Directory
 cd vsd-scl180-orfs/orfs/flow
 ### Step 2 — Run RTL-to-GDS Flow
-#### Made come changes for getting error:
+#### Made some changes for getting error:
 -sed -i '/pin.*GCLK/a \        function : "(GATE * CLK)";' /home/abhishek/Desktop/vsd-scl180-orfs/orfs/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 #### verify the changes made using grep
 - grep -iB 1 "function.*GATE" /home/abhishek/Desktop/vsd-scl180-orfs/orfs/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib | grep “GCLK"
