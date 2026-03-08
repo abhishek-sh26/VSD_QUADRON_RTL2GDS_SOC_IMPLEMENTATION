@@ -408,7 +408,7 @@ Klayout veiw of final GDS generated in Codespaces
 
 ### These files define the complete RTL-to-GDS environment used inside GitHub Codespaces.
 
-Toolchain Mapping (RTL-to-GDS Flow) 
+#### Toolchain Mapping (RTL-to-GDS Flow) 
 
 | Tool          | Installed From             | Purpose in Flow                                                                | Stage Used           |
 | ------------- | -------------------------- | ------------------------------------------------------------------------------ | -------------------- |
@@ -425,13 +425,13 @@ Toolchain Mapping (RTL-to-GDS Flow)
 
 
 
-Flow Architecture Explanation
-ORFS (OpenROAD Flow Scripts) automates the complete RTL-to-GDS flow using scripts and Makefiles.
-The Makefile controls and executes each stage of the design flow in the correct order.
-Synthesis is the first stage where RTL (Verilog) is converted into a gate-level netlist using Yosys.
-After synthesis, the physical design stages begin in OpenROAD, including floorplanning, placement, clock tree synthesis (CTS), and routing.
-Timing analysis is performed using OpenSTA to check timing constraints such as WNS and TNS.
-After routing and timing verification, the final GDSII file is generated, which represents the physical layout of the chip ready for fabrication.
+## Flow Architecture Explanation
+### ORFS (OpenROAD Flow Scripts) automates the complete RTL-to-GDS flow using scripts and Makefiles.
+### The Makefile controls and executes each stage of the design flow in the correct order.
+### Synthesis is the first stage where RTL (Verilog) is converted into a gate-level netlist using Yosys.
+### After synthesis, the physical design stages begin in OpenROAD, including floorplanning, placement, clock tree synthesis (CTS), and routing.
+### Timing analysis is performed using OpenSTA to check timing constraints such as WNS and TNS.
+### After routing and timing verification, the final GDSII file is generated, which represents the physical layout of the chip ready for fabrication.
 
 
 
