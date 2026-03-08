@@ -397,6 +397,8 @@ GDS (Codespaces): The final layout file GDSII is generated which represents the 
 Klayout veiw of final GDS generated in Codespaces   
 <img width="1280" height="754" alt="klayout codespace OR" src="https://github.com/user-attachments/assets/20ac237a-ef05-492e-850a-4f9190e260b5" />
 
+</details>
+
 <details>
 <summary><strong>Phase 2 - Devcontainer Toolchain Understanding </strong></summary>
 
