@@ -347,13 +347,24 @@ Improper clock tree design can lead to timing violations due to excessive skew o
 
 #### These commands confirm that the RTL-to-GDS toolchain is correctly installed inside the devcontainer environment.
 
-## Task 1.2 — Run Sky130 Testcase in Cloud
+## **Task 1.2** — Run Sky130 Testcase in Cloud
 ### Inside the code space :
 #### Navigated to the design directory
 - cd orfs/flow
 #### Run the RTL-to-GDS flow:
-- make 
-#### The ORFS flow automatically performs the following stages:
+- make
+
+  ## what is make command and how it performs
+### Make is a build automation tool used to execute a sequence of commands defined in a Makefile. It helps automate complex processes so that multiple tasks can be run with a single command.
+
+### When the make command is executed, it reads the Makefile present in the directory. The Makefile contains rules and instructions that define how different stages of the workflow should be executed.
+
+### In the ORFS RTL-to-GDS flow, make automatically runs the entire design process in the correct order. It calls different tools such as Yosys for synthesis, OpenROAD for physical design, and OpenSTA for timing analysis.
+
+### Thus, instead of manually running each step, the make command executes all stages like synthesis, floorplanning, placement, clock tree synthesis, routing, and GDS generation in a single automated flow.
+
+  
+## The ORFS flow automatically performs the following stages:
 - Synthesis
 - Floorplanning
 - Placement
@@ -401,14 +412,16 @@ Klayout veiw of final GDS generated in Codespaces
 
 <details>
 <summary><strong>Phase 2 - Devcontainer Toolchain Understanding </strong></summary>
-## **Files analyzed **
+
+  ## **Files analyzed**
 
                         - .devcontainer/Dockerfile
                         - .devcontainer/install-openroad.sh
 
 ### These files define the complete RTL-to-GDS environment used inside GitHub Codespaces.
 
-#### Toolchain Mapping (RTL-to-GDS Flow) 
+## **Task 2.1**
+### Toolchain Mapping (RTL-to-GDS Flow) 
 
 | Tool          | Installed From             | Purpose in Flow                                                                | Stage Used           |
 | ------------- | -------------------------- | ------------------------------------------------------------------------------ | -------------------- |
@@ -449,18 +462,24 @@ Klayout veiw of final GDS generated in Codespaces
 <img width="1280" height="800" alt="Screenshot 2026-03-08 at 7 55 07 PM" src="https://github.com/user-attachments/assets/cfc2ad66-7c5c-4c2c-bf8f-fa3aa2e50e79" />
 
 
-## install ORFS locally
+## Task 3.1 Install ORFS locally
+
 ### Step1 —Clone repository 
 - git clone https://github.com/vsdip/vsd-scl180-orfs
+  
 ### Step 2—enter into directory 
 - cd vsd-scl180-orfs
-- Verified all the files are downloaded properly 
+- Verified all the files are downloaded properly
+- 
 #### Make —version
 - Output : GNU Make 4.3
+- 
   <img width="509" height="71" alt="Screenshot 2026-03-08 at 8 35 03 PM" src="https://github.com/user-attachments/assets/faab5ed8-1ec7-4c8f-ac6e-497094a3ba37" />
+  
   ### Change directory to Desktop
 cd Desktop
-## Install yosys locally 
+
+##  Install yosys locally 
 ### Step 1 — Clone the Repository
 git clone https://github.com/YosysHQ/yosys.git
 
@@ -492,19 +511,25 @@ cd yosys
 
 <img width="785" height="47" alt="Screenshot 2026-03-08 at 8 34 01 PM" src="https://github.com/user-attachments/assets/5fda2c1f-a8e0-467a-a221-43afcbeb4391" />
 
-## Install openroad locally 
+## Task 3.2 Install openroad locally 
+
 ### Step 1 — clone the repository
 - git clone https://github.com/The-OpenROAD-Project/OpenROAD.git
+- 
 ### Step 2 — Enter the Directory
 - cd OpenROAD
+- 
 ### Step 3 —Dependancy installation 
 - sudo ./etc/DependencyInstaller.sh -base
 - ./etc/DependencyInstaller.sh -common -local
+- 
 ### Step 4 —OpenROAD Build 
 - ./etc/Build.sh -threads=1
+- 
 ### Step 5 —verify installation 
 - openroad -version
 - output : 26Q1-1752-gdc2afc9d47
+- 
 <img width="894" height="50" alt="Screenshot 2026-03-08 at 8 36 07 PM" src="https://github.com/user-attachments/assets/da3d6c79-23ad-4437-b4fe-a199e56e84e7" />
 
 </details>
