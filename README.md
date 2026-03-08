@@ -1,4 +1,4 @@
-# VSD_QUADRON_RTL2GDS_SOC_IMPLEMENTATION
+<img width="1275" height="697" alt="route codespace OR" src="https://github.com/user-attachments/assets/14ec1709-3618-406f-8026-0a08befca1b7" /># VSD_QUADRON_RTL2GDS_SOC_IMPLEMENTATION
 
 
 
@@ -322,7 +322,83 @@ Improper clock tree design can lead to timing violations due to excessive skew o
 <details>
 <summary><strong>Phase 1 — ORFS Execution in GitHub Codespaces </strong></summary>
 
+## Task 1.1 — Repository Setup
 
+### Repository used : https://github.com/vsdip/vsd-scl180-orfs
+#### Steps performed:
+
+- Forked the repository to my GitHub account.
+- Opened the repository in GitHub Codespaces.
+- Allowed the devcontainer environment to build completely.
+- Verified the toolchain installation inside the container.
+  
+<img width="638" height="71" alt="Dev build success " src="https://github.com/user-attachments/assets/49dd474c-5811-4fab-b358-62711bbe101f" />
+
+<img width="1155" height="210" alt="setup success" src="https://github.com/user-attachments/assets/16e63a0a-0189-4c40-9a4b-44170bd08e95" />
+
+### Terminal output :
+
+- Openroad -version : v2.0-28075-g0f99689f45
+- yosys -V  : Yosys 0.58+94 (git sha1 4011d7265, clang++ 18.1.8 -fPIC -O3)
+- python3 —version : Python 3.10.12
+- make —version :GNU Make 4.3  Built for x86_64-pc-linux-gnu
+
+  <img width="934" height="297" alt="codespace versions OR" src="https://github.com/user-attachments/assets/08232824-8ad9-452a-9352-e3e58d8217a9" />
+
+#### These commands confirm that the RTL-to-GDS toolchain is correctly installed inside the devcontainer environment.
+
+## Task 1.2 — Run Sky130 Testcase in Cloud
+### Inside the code space :
+#### Navigated to the design directory
+- cd orfs/flow
+#### Run the RTL-to-GDS flow:
+- make 
+#### The ORFS flow automatically performs the following stages:
+- Synthesis
+- Floorplanning
+- Placement
+- Clock Tree Synthesis
+- Routing
+- GDS generation
+  
+### Cloud Execution Results
+#### Synthesis  : **make synth** 
+- RTL is converted into a gate-level netlist using Yosys.
+
+#### Floorplan : **make floorplan**
+- Floorplanning defines the chip layout boundaries, placement rows, and IO positions.
+#### make gui_floorplan : shows floorplan layout
+
+<img width="1278" height="585" alt="floorplan codespace OR" src="https://github.com/user-attachments/assets/ccbe4781-c03f-4036-9682-89be87eae509" />
+
+#### Placement : **make place**
+- Placement arranges standard cells inside the chip area.
+
+#### Make gui_place : shows placement layout 
+<img width="1277" height="672" alt="placement codespace OR" src="https://github.com/user-attachments/assets/58a2e654-876f-40d4-8b90-a09077b33b79" />
+
+#### Clock tree synthesis (CTS) :  **make cts**
+ - CTS creates the clock distribution network to minimize skew and delay.
+
+<img width="1270" height="668" alt="cts codespace OR" src="https://github.com/user-attachments/assets/ee3692ed-09bc-499e-a33a-2dfec4af74c3" />
+ 
+
+
+#### Routing : make route
+- Routing connects all nets using metal layers.
+
+#### make gui_route :shows routed layout
+
+<img width="1275" height="697" alt="route codespace OR" src="https://github.com/user-attachments/assets/8abdbec7-8f22-42a0-af9e-d6473aed308c" />
+
+
+GDS (Codespaces): The final layout file GDSII is generated which represents the physical chip layout. 
+
+Klayout veiw of final GDS generated in Codespaces   
+<img width="1280" height="754" alt="klayout codespace OR" src="https://github.com/user-attachments/assets/20ac237a-ef05-492e-850a-4f9190e260b5" />
+
+<details>
+<summary><strong>Phase 2 - Devcontainer Toolchain Understanding </strong></summary>
 
 
          
