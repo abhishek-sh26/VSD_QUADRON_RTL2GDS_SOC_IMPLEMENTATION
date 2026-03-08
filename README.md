@@ -318,9 +318,10 @@ Improper clock tree design can lead to timing violations due to excessive skew o
 
 ---
 ## WEEK2 Toolchain Mastery and ORFS Execution (Cloud to Local)
+
 </details>
 <details>
-<summary><strong>Phase 1 — ORFS Execution in GitHub Codespaces </strong></summary>
+<summary><strong>PHASE-1 — ORFS Execution in GitHub Codespaces </strong></summary>
 
 ## Task 1.1 — Repository Setup
 
@@ -411,7 +412,7 @@ Klayout veiw of final GDS generated in Codespaces
 </details>
 
 <details>
-<summary><strong>Phase 2 - Devcontainer Toolchain Understanding </strong></summary>
+<summary><strong>PHASE-2 - Devcontainer Toolchain Understanding </strong></summary>
 
   ## **Files analyzed**
 
@@ -455,7 +456,7 @@ Klayout veiw of final GDS generated in Codespaces
 </details>
 
 <details>
-<summary><strong>Phase-3 Local Installation (Self-Owned Environment)  </strong></summary>
+<summary><strong>PHASE-3 - Local Installation (Self-Owned Environment)  </strong></summary>
 
 ## ORFS Installation in Local Ubuntu machine
 ### Os ubuntu 22.04
@@ -535,7 +536,7 @@ cd yosys
 </details>
 
 <details>
-<summary><strong>PHASE 4 — Re-Run RTL-to-GDS Locally </strong></summary>
+<summary><strong>PHASE-4 — Re-Run RTL-to-GDS Locally </strong></summary>
 
 
 ## After successfully installing ORFS and OpenROAD in the local Ubuntu environment, the same testcase used in the cloud environment was executed locally to verify the RTL-to-GDS flow.
