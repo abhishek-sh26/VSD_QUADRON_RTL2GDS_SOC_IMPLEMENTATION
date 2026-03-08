@@ -312,6 +312,13 @@ Improper clock tree design can lead to timing violations due to excessive skew o
 
 
 
+## WEEK2
+
+<details>
+<summary><strong>Phase 1 — ORFS Execution in GitHub Codespaces </strong></summary>
+
+--- 
+
 
          
 
