@@ -310,14 +310,19 @@ Improper clock tree design can lead to timing violations due to excessive skew o
 ✔ Generates parasitics (used for timing analysis)
 ✔ Prepares design for final verification (DRC/LVS)
 
+</details>
 
+---
 
+</details>
+
+---
 ## WEEK2
 
 <details>
 <summary><strong>Phase 1 — ORFS Execution in GitHub Codespaces </strong></summary>
 
---- 
+
 
 
          
