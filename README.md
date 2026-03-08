@@ -1,6 +1,6 @@
 # VSD_QUADRON_RTL2GDS_SOC_IMPLEMENTATION
 
-##🚀 Learning – RTL2GDS using OpenLane & Sky130
+## 🚀 **Learning – RTL2GDS using OpenLane & Sky130**
 <details><summary> week 1......</summary>
 
 # 🚀 Week 1 Learning – RTL2GDS using OpenLane & Sky130
