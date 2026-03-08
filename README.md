@@ -424,18 +424,129 @@ Klayout veiw of final GDS generated in Codespaces
 
 
 
+## Task 2.2
+### Flow Architecture Explanation
 
-## Flow Architecture Explanation
-### ORFS (OpenROAD Flow Scripts) automates the complete RTL-to-GDS flow using scripts and Makefiles.
-### The Makefile controls and executes each stage of the design flow in the correct order.
-### Synthesis is the first stage where RTL (Verilog) is converted into a gate-level netlist using Yosys.
-### After synthesis, the physical design stages begin in OpenROAD, including floorplanning, placement, clock tree synthesis (CTS), and routing.
-### Timing analysis is performed using OpenSTA to check timing constraints such as WNS and TNS.
-### After routing and timing verification, the final GDSII file is generated, which represents the physical layout of the chip ready for fabrication.
+#### ORFS (OpenROAD Flow Scripts) automates the complete RTL-to-GDS flow using scripts and Makefiles.
+
+#### The Makefile controls and executes each stage of the design flow in the correct order.
+
+#### Synthesis is the first stage where RTL (Verilog) is converted into a gate-level netlist using Yosys.
+
+#### After synthesis, the physical design stages begin in OpenROAD, including floorplanning, placement, clock tree synthesis (CTS), and routing.
+
+#### Timing analysis is performed using OpenSTA to check timing constraints such as WNS and TNS.
+
+#### After routing and timing verification, the final GDSII file is generated, which represents the physical layout of the chip ready for fabrication.
+
+</details>
+
+<details>
+<summary><strong>Phase-3 Local Installation (Self-Owned Environment)  </strong></summary>
+
+## ORFS Installation in Local Ubuntu machine
+### Os ubuntu 22.04
+<img width="1280" height="800" alt="Screenshot 2026-03-08 at 7 55 07 PM" src="https://github.com/user-attachments/assets/cfc2ad66-7c5c-4c2c-bf8f-fa3aa2e50e79" />
+
+
+## install ORFS locally
+### Step1 —Clone repository 
+- git clone https://github.com/vsdip/vsd-scl180-orfs
+### Step 2—enter into directory 
+- cd vsd-scl180-orfs
+- Verified all the files are downloaded properly 
+#### Make —version
+- Output : GNU Make 4.3
+  <img width="509" height="71" alt="Screenshot 2026-03-08 at 8 35 03 PM" src="https://github.com/user-attachments/assets/faab5ed8-1ec7-4c8f-ac6e-497094a3ba37" />
+  ### Change directory to Desktop
+cd Desktop
+## Install yosys locally 
+### Step 1 — Clone the Repository
+git clone https://github.com/YosysHQ/yosys.git
+
+- Yosys requires additional libraries included as git submodules, so they must also be initialized. 
+
+### Step 2 — Enter the Directory
+
+cd yosys
+
+
+### Step 3 — Build the Tool
+####Compile the source code using:
+
+- make -j$(nproc)
+
+- This builds the Yosys synthesis tool from source.
+
+### Step 4 — Install the Tool
+
+- sudo make install
+
+- This installs Yosys into the system directories so it can be used globally.
+
+### Step 5 — Verify Installation
+
+- yosys -V
+
+- Output : Yosys 0.63+87
+
+<img width="785" height="47" alt="Screenshot 2026-03-08 at 8 34 01 PM" src="https://github.com/user-attachments/assets/5fda2c1f-a8e0-467a-a221-43afcbeb4391" />
+
+## Install openroad locally 
+### Step 1 — clone the repository
+- git clone https://github.com/The-OpenROAD-Project/OpenROAD.git
+### Step 2 — Enter the Directory
+- cd OpenROAD
+### Step 3 —Dependancy installation 
+- sudo ./etc/DependencyInstaller.sh -base
+- ./etc/DependencyInstaller.sh -common -local
+### Step 4 —OpenROAD Build 
+- ./etc/Build.sh -threads=1
+### Step 5 —verify installation 
+- openroad -version
+- output : 26Q1-1752-gdc2afc9d47
+<img width="894" height="50" alt="Screenshot 2026-03-08 at 8 36 07 PM" src="https://github.com/user-attachments/assets/da3d6c79-23ad-4437-b4fe-a199e56e84e7" />
+
+</details>
+
+<details>
+<summary><strong>PHASE 4 — Re-Run RTL-to-GDS Locally </strong></summary>
+
+
+## After successfully installing ORFS and OpenROAD in the local Ubuntu environment, the same testcase used in the cloud environment was executed locally to verify the RTL-to-GDS flow.
+### Step 1 — Navigate to ORFS flow Directory
+cd vsd-scl180-orfs/orfs/flow
+### Step 2 — Run RTL-to-GDS Flow
+#### Made come changes for getting error:
+-sed -i '/pin.*GCLK/a \        function : "(GATE * CLK)";' /home/abhishek/Desktop/vsd-scl180-orfs/orfs/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+#### verify the changes made using grep
+- grep -iB 1 "function.*GATE" /home/abhishek/Desktop/vsd-scl180-orfs/orfs/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib | grep “GCLK"
+  <img width="1206" height="308" alt="Screenshot 2026-03-08 at 8 44 49 PM" src="https://github.com/user-attachments/assets/de7d6ead-91fa-415f-807f-372e83449a18" />
+ ## Execute the complete flow using the Makefile:
+### export OPENROAD_EXE=/home/abhishek/Desktop/OpenROAD/build/bin/openroad
+### export PLATFORM=sky130hd
+### export DESIGN=riscv32i
+### make clean_issues
+## Run the flow RTL2GDS with the make command 
+### make PLATFORM=sky130hd DESIGN=riscv32i
+
+## The final Klayout veiw of the final.gds
+<img width="1034" height="42" alt="Screenshot 2026-03-08 at 11 59 18 PM" src="https://github.com/user-attachments/assets/4f828aad-4214-48aa-aa41-490c06777567" />
+
+<img width="1218" height="768" alt="Screenshot 2026-03-08 at 11 56 44 PM" src="https://github.com/user-attachments/assets/d73b6dbf-5854-46bb-bd01-74a6e4560bcb" />
 
 
 
-         
+
+  
+
+  
+
+
+
+
+
+
 
 
 
