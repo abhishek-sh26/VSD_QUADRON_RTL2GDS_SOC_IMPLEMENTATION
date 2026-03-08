@@ -1,4 +1,4 @@
-<img width="1275" height="697" alt="route codespace OR" src="https://github.com/user-attachments/assets/14ec1709-3618-406f-8026-0a08befca1b7" /># VSD_QUADRON_RTL2GDS_SOC_IMPLEMENTATION
+# VSD_QUADRON_RTL2GDS_SOC_IMPLEMENTATION
 
 
 
