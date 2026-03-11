@@ -668,6 +668,9 @@ The export command is used to set environment variables in the current shell ses
 
 ### The objective of Week-3 is to understand the block-level verification flow of the VSDSquadron SoC before moving to full-chip integration.
 
+</details>
+<details>
+<summary><strong>PHASE-1 — Standalone Block Verification </strong></summary>
 
 In this phase, the following tasks were performed:
 	•	Clone the VSDSquadron SoC repository
