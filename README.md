@@ -795,8 +795,10 @@ sudo mkdir -p /home/vsduser
 - sudo apt install gtkwave
   
 ## after installaton completed successfully veiw output with following command :
-- gtkwave RTL-spi_master.vcd
-<img width="1212" height="477" alt="spi master waveform" src="https://github.com/user-attachments/assets/ad55ae79-fec3-4158-9ca6-3c72fcdd2056" />
+- gtkwave RTL-spi_master.vcd spi_master.gtkw
+
+<img width="1212" height="198" alt="gtkwave spi_master" src="https://github.com/user-attachments/assets/ba08dd26-c460-4e89-beb2-ea91c7167f4d" />
+
 
 
 
