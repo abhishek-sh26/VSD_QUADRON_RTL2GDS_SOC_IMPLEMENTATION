@@ -658,8 +658,26 @@ The export command is used to set environment variables in the current shell ses
 ### Overall, Week-2 helped build confidence in executing the RTL-to-GDS flow independently, understanding the underlying toolchain, and debugging design flows using Unix commands, which is essential for implementing complete SoC designs in the upcoming weeks.
   
 
+</details>
+
+---
+
+</details>
+
+---
+## WEEK3 Block-Level Verification of VSDSquadron SoC
+
+### The objective of Week-3 is to understand the block-level verification flow of the VSDSquadron SoC before moving to full-chip integration.
 
 
+In this phase, the following tasks were performed:
+	•	Clone the VSDSquadron SoC repository
+	•	Setup the verification environment
+	•	Run standalone block verification tests
+	•	Understand the Makefile-based verification flow
+	•	Execute the SPI Master test
+	•	Analyze the simulation output
+	•	Understand how PASS / FAIL is determined
 
 
 
