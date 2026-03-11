@@ -1,4 +1,4 @@
-<img width="999" height="49" alt="standalone tests list" src="https://github.com/user-attachments/assets/d35f041e-9530-4cc5-99ea-c15f35c6b8a2" /># VSD_QUADRON_RTL2GDS_SOC_IMPLEMENTATION
+# VSD_QUADRON_RTL2GDS_SOC_IMPLEMENTATION
 
 
 
