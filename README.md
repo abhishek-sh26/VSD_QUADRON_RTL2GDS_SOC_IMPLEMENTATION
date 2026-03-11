@@ -1,4 +1,4 @@
-# VSD_QUADRON_RTL2GDS_SOC_IMPLEMENTATION
+<img width="999" height="49" alt="standalone tests list" src="https://github.com/user-attachments/assets/d35f041e-9530-4cc5-99ea-c15f35c6b8a2" /># VSD_QUADRON_RTL2GDS_SOC_IMPLEMENTATION
 
 
 
@@ -673,14 +673,125 @@ The export command is used to set environment variables in the current shell ses
 <details>
 <summary><strong>PHASE-1 — Standalone Block Verification </strong></summary>
 
-In this phase, the following tasks were performed:
-	•	Clone the VSDSquadron SoC repository
-	•	Setup the verification environment
-	•	Run standalone block verification tests
-	•	Understand the Makefile-based verification flow
-	•	Execute the SPI Master test
-	•	Analyze the simulation output
-	•	Understand how PASS / FAIL is determined
+## In this phase, the following tasks were performed:
+	- •	Clone the VSDSquadron SoC repository
+	- •	Setup the verification environment
+	- •	Run standalone block verification tests
+	- •	Understand the Makefile-based verification flow
+	- •	Execute the SPI Master test
+	- •	Analyze the simulation output
+	- •	Understand how PASS / FAIL is determined
+
+## 1. Repository Setup
+### The first step was cloning the official repository.
+
+- git clone https://github.com/vsdip/vsdsquadron-soc
+- cd vsdsquadron-soc
+
+  
+
+### Switch to the required branch used in the workshop:
+- git checkout add-vsdsquadron-soc-folders
+
+## 2. Install Required Tools
+
+### The standalone verification flow requires:
+	
+- •	RISC-V compiler
+- •	Verilog simulator
+- •	Make utility
+
+### Install them using:
+- sudo apt update
+- sudo apt install iverilog gcc-riscv64-unknown-elf make
+
+### Verify installation:
+#### iverilog -V
+- **output** : Icarus Verilog version 12.0 (stable) ()
+#### riscv64-unknown-elf-gcc --version
+- **output** : riscv64-unknown-elf-gcc (13.2.0-11ubuntu1+12) 13.2.0
+
+## 3. Navigate to Verification Directory
+### Standalone verification tests are located in:
+- cd caravel_mgmt_soc_litex/verilog/dv/tests-standalone
+
+### List available tests:
+- ls
+
+- **output** :
+  debug  generated  gpio_mgmt  irq  Makefile  mem  run-all.sh  run.sh  spi_master  timer  uart
+
+<img width="999" height="49" alt="standalone tests list" src="https://github.com/user-attachments/assets/2576d616-3d9f-4d2a-bc4b-95f440dff5f9" />
+
+## Each directory represents a standalone hardware block verification test.
+
+## 4. Fix Repository Path Expectations
+### The Makefiles in the verification environment expect the repository to exist in the following location:
+- /home/vsduser/
+### the repository was cloned in the local system at:
+- /home/abhishek/Desktop/vsdsquadron-soc
+
+## To resolve this path mismatch, symbolic links were created so that the Makefiles could locate the required design files.
+
+### Commands used:
+sudo mkdir -p /home/vsduser
+
+- sudo ln -s /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex /home/vsduser/caravel_mgmt_soc_litex
+
+- sudo ln -s /home/abhishek/Desktop/vsdsquadron-soc/caravel /home/vsduser/caravel
+
+## 5. Fix Missing SRAM Model
+
+### While running the simulation, the following error occurred:
+- sky130_sram_2kbyte_1rw1r_32x512_8.v: No such file or directory
+
+### This happened because the SRAM model required for simulation was not present in the repository.
+
+### To resolve this issue, a placeholder SRAM model file was created.
+
+#### Command used:
+- mkdir -p /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/cvc-pdk
+- touch /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/cvc-pdk/sky130_sram_2kbyte_1rw1r_32x512_8.v
+
+### This allowed the Verilog simulator to compile the design hierarchy successfully.
+
+
+## 6. Navigate to Standalone Tests
+- cd /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/dv/tests-standalone
+
+## 7. Run SPI Master Test (Task-1)
+- cd spi_master
+- 
+### Clean previous build files:
+  - make clean
+    
+### Run the simulation:
+- make
+
+## 8. Simulation Output
+
+### Monitor: Test SPI Master (RTL) Passed
+
+<img width="1077" height="147" alt="spi masted passed" src="https://github.com/user-attachments/assets/7bf103fe-4514-4d2e-8fd9-0dfcfc690cc6" />
+
+## Generated Files (SPI Master Test)
+
+### After running the SPI Master standalone verification test, the following output files were generated in the test directory:
+
+#### File Name                                           Description
+
+- spi_master.hex                  Memory initialization file generated from the compiled firmware and loaded into the simulated memory.
+- spi_master.lst                  Disassembled firmware instructions generated using objdump.
+- RTL-spi_master.vcd              Waveform dump file generated during simulation for signal analysis.
+
+
+## These files confirm that the firmware compilation and RTL simulation were executed successfully as part of the standalone verification flow.
+
+## To veiw waveform of the output install gtkwave
+- sudo apt install gtkwave
+- 
+## after installaton completed successfully veiw output with following command :
+- gtkwave RTL-spi_master.vcd
 
 
 
