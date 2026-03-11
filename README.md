@@ -796,6 +796,7 @@ sudo mkdir -p /home/vsduser
   
 ## after installaton completed successfully veiw output with following command :
 - gtkwave RTL-spi_master.vcd
+<img width="1212" height="477" alt="spi master waveform" src="https://github.com/user-attachments/assets/ad55ae79-fec3-4158-9ca6-3c72fcdd2056" />
 
 
 
