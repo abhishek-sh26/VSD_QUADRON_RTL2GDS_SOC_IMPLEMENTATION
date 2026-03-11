@@ -693,6 +693,7 @@ The export command is used to set environment variables in the current shell ses
 ### Switch to the required branch used in the workshop:
 - git checkout add-vsdsquadron-soc-folders
 
+
 ## 2. Install Required Tools
 
 ### The standalone verification flow requires:
@@ -708,6 +709,7 @@ The export command is used to set environment variables in the current shell ses
 ### Verify installation:
 #### iverilog -V
 - **output** : Icarus Verilog version 12.0 (stable) ()
+- 
 #### riscv64-unknown-elf-gcc --version
 - **output** : riscv64-unknown-elf-gcc (13.2.0-11ubuntu1+12) 13.2.0
 
@@ -726,12 +728,14 @@ The export command is used to set environment variables in the current shell ses
 ## Each directory represents a standalone hardware block verification test.
 
 ## 4. Fix Repository Path Expectations
+
 ### The Makefiles in the verification environment expect the repository to exist in the following location:
 - /home/vsduser/
+  
 ### the repository was cloned in the local system at:
 - /home/abhishek/Desktop/vsdsquadron-soc
 
-## To resolve this path mismatch, symbolic links were created so that the Makefiles could locate the required design files.
+### To resolve this path mismatch, symbolic links were created so that the Makefiles could locate the required design files.
 
 ### Commands used:
 sudo mkdir -p /home/vsduser
@@ -761,7 +765,7 @@ sudo mkdir -p /home/vsduser
 
 ## 7. Run SPI Master Test (Task-1)
 - cd spi_master
-- 
+  
 ### Clean previous build files:
   - make clean
     
@@ -789,7 +793,7 @@ sudo mkdir -p /home/vsduser
 
 ## To veiw waveform of the output install gtkwave
 - sudo apt install gtkwave
-- 
+  
 ## after installaton completed successfully veiw output with following command :
 - gtkwave RTL-spi_master.vcd
 
