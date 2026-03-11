@@ -316,8 +316,7 @@ Improper clock tree design can lead to timing violations due to excessive skew o
 
 </details>
 
----
-## WEEK2 Toolchain Mastery and ORFS Execution (Cloud to Local)
+## WEEK-2 Toolchain Mastery and ORFS Execution (Cloud to Local)
 
 ### The objective of Week-2 was to gain practical experience executing the RTL-to-GDS flow using OpenROAD Flow Scripts (ORFS) both in GitHub Codespaces (cloud) and local Linux environment. This week focused on understanding the physical design toolchain, installing OpenROAD locally, running the complete flow, and developing Unix debugging skills required for ASIC physical design.
 
