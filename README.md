@@ -799,6 +799,9 @@ sudo mkdir -p /home/vsduser
 
 <img width="1212" height="198" alt="gtkwave spi_master" src="https://github.com/user-attachments/assets/ba08dd26-c460-4e89-beb2-ea91c7167f4d" />
 
+<img width="1280" height="800" alt="spi master o:p wave" src="https://github.com/user-attachments/assets/fdfc0bd2-e78f-4dd3-b2a5-c3fb0c967f94" />
+
+
 
 
 
