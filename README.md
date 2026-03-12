@@ -685,26 +685,26 @@ The export command is used to set environment variables in the current shell ses
 ## 1. Repository Setup
 ### The first step was cloning the official repository.
 
-- git clone https://github.com/vsdip/vsdsquadron-soc
-- cd vsdsquadron-soc
+    - git clone https://github.com/vsdip/vsdsquadron-soc
+    - cd vsdsquadron-soc
 
   
 
 ### Switch to the required branch used in the workshop:
-- git checkout add-vsdsquadron-soc-folders
+    - git checkout add-vsdsquadron-soc-folders
 
 
 ## 2. Install Required Tools
 
 ### The standalone verification flow requires:
 	
-- •	RISC-V compiler
-- •	Verilog simulator
-- •	Make utility
+•	RISC-V compiler
+•	Verilog simulator
+•	Make utility
 
 ### Install them using:
-- sudo apt update
-- sudo apt install iverilog gcc-riscv64-unknown-elf make
+     - sudo apt update
+     - sudo apt install iverilog gcc-riscv64-unknown-elf make
 
 ### Verify installation:
 #### iverilog -V
@@ -715,10 +715,10 @@ The export command is used to set environment variables in the current shell ses
 
 ## 3. Navigate to Verification Directory
 ### Standalone verification tests are located in:
-- cd caravel_mgmt_soc_litex/verilog/dv/tests-standalone
+    - cd caravel_mgmt_soc_litex/verilog/dv/tests-standalone
 
 ### List available tests:
-- ls
+    - ls
 
 - **output** :
   debug  generated  gpio_mgmt  irq  Makefile  mem  run-all.sh  run.sh  spi_master  timer  uart
@@ -730,47 +730,47 @@ The export command is used to set environment variables in the current shell ses
 ## 4. Fix Repository Path Expectations
 
 ### The Makefiles in the verification environment expect the repository to exist in the following location:
-- /home/vsduser/
+    - /home/vsduser/
   
 ### the repository was cloned in the local system at:
-- /home/abhishek/Desktop/vsdsquadron-soc
+    - /home/abhishek/Desktop/vsdsquadron-soc
 
 ### To resolve this path mismatch, symbolic links were created so that the Makefiles could locate the required design files.
 
 ### Commands used:
 sudo mkdir -p /home/vsduser
 
-- sudo ln -s /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex /home/vsduser/caravel_mgmt_soc_litex
+    - sudo ln -s /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex /home/vsduser/caravel_mgmt_soc_litex
 
-- sudo ln -s /home/abhishek/Desktop/vsdsquadron-soc/caravel /home/vsduser/caravel
+      - sudo ln -s /home/abhishek/Desktop/vsdsquadron-soc/caravel /home/vsduser/caravel
 
 ## 5. Fix Missing SRAM Model
 
 ### While running the simulation, the following error occurred:
-- sky130_sram_2kbyte_1rw1r_32x512_8.v: No such file or directory
+    - sky130_sram_2kbyte_1rw1r_32x512_8.v: No such file or directory
 
 ### This happened because the SRAM model required for simulation was not present in the repository.
 
 ### To resolve this issue, a placeholder SRAM model file was created.
 
 #### Command used:
-- mkdir -p /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/cvc-pdk
-- touch /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/cvc-pdk/sky130_sram_2kbyte_1rw1r_32x512_8.v
+    - mkdir -p /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/cvc-pdk
+    - touch /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/cvc-pdk/sky130_sram_2kbyte_1rw1r_32x512_8.v
 
 ### This allowed the Verilog simulator to compile the design hierarchy successfully.
 
 
 ## 6. Navigate to Standalone Tests
-- cd /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/dv/tests-standalone
+    - cd /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/dv/tests-standalone
 
 ## 7. Run SPI Master Test (Task-1)
-- cd spi_master
+    - cd spi_master
   
 ### Clean previous build files:
-  - make clean
+    - make clean
     
 ### Run the simulation:
-- make
+    - make
 
 ## 8. Simulation Output
 
@@ -792,14 +792,28 @@ sudo mkdir -p /home/vsduser
 ## These files confirm that the firmware compilation and RTL simulation were executed successfully as part of the standalone verification flow.
 
 ## To veiw waveform of the output install gtkwave
-- sudo apt install gtkwave
+    - sudo apt install gtkwave
   
 ## after installaton completed successfully veiw output with following command :
-- gtkwave RTL-spi_master.vcd spi_master.gtkw
+    - gtkwave RTL-spi_master.vcd spi_master.gtkw
 
 <img width="1212" height="198" alt="gtkwave spi_master" src="https://github.com/user-attachments/assets/ba08dd26-c460-4e89-beb2-ea91c7167f4d" />
 
 <img width="1280" height="800" alt="spi master o:p wave" src="https://github.com/user-attachments/assets/fdfc0bd2-e78f-4dd3-b2a5-c3fb0c967f94" />
+
+## Task 2 — Understand the Verification Flow
+### The standalone verification tests are controlled by a Makefile-based simulation flow.
+### When the make command is executed, the Makefile automatically performs a sequence of steps to compile the firmware, prepare the simulation environment, run the simulator, and determine the PASS/FAIL result.
+
+### The overall verification flow is described below.
+
+## Step 1 — Firmware Compilation
+
+### The firmware program (spi_master.c) is compiled using the RISC-V cross compiler.
+### This step generates the compiled firmware executable:
+    - spi_master.elf
+- The .elf file contains the machine instructions that will run on the simulated processor.
+
 
 
 
