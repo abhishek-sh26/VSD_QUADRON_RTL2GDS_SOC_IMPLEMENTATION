@@ -1068,6 +1068,21 @@ Monitor: Timeout, Test Debug (RTL) Failed
 ### Tests failed modules : timer, irq, debug
 
 
+## 
+
++------------+--------+
+| tests-standalone |status (sky130)|
++------------+--------+
+| spi_master | PASS   |
+| gpio_mgmt  | PASS   |
+| mem        | PASS   |
+| uart       | PASS   |
+| timer      | FAIL   |
+| irq        | FAIL   |
+| debug      | FAIL   |
++------------+--------+
+
+
 
 </details>
 
@@ -1075,7 +1090,34 @@ Monitor: Timeout, Test Debug (RTL) Failed
 <summary><strong>PHASE-3 - Caravel Integrated Tests </strong></summary>
 
 
+## Objective
 
+### The objective of Phase-3 is to verify the functionality of VSDSquadron SoC blocks within the Caravel integrated environment. In this phase, the hardware modules are tested together with the Caravel management system to ensure proper communication and system-level functionality before full SoC implementation.
+
+### 1. Navigate to the Caravel test directory
+
+    cd ~/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/dv/tests-caravel
+
+#### Check available test folders:
+
+ <img width="1102" height="152" alt="cd ls caravel tests" src="https://github.com/user-attachments/assets/8f8d6fe4-f193-40eb-b6d2-c6d6a932fce5" />
+
+ #### The actual caravel tests should be run 
+    user_pass_thru
+    uart
+    sysctrl
+    sram_exec
+    spi_master
+    pullupdown
+    pll
+	pass_thru_fix
+	pass_thru
+	mem
+	hkspi_power
+	gpio_mgmt
+	hkspi
+
+	
 
 
 
