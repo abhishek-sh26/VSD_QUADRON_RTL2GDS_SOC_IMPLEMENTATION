@@ -763,6 +763,9 @@ sudo mkdir -p /home/vsduser
 ## 6. Navigate to Standalone Tests
      cd /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/dv/tests-standalone
 
+	 set GCC_PATH=/usr/bin
+	 echo 'export GCC_PATH=/usr/bin' >> ~/.bashrc
+
 ## 7. Run SPI Master Test (Task-1)
      cd spi_master
   
@@ -908,5 +911,140 @@ sudo mkdir -p /home/vsduser
 <summary><strong>PHASE-2 - Running All Standalone Tests </strong></summary>
 
 ## In Phase-2, the objective is to execute verification tests for all hardware blocks present in the tests-standalone directory. Each block is tested independently using the same Makefile-driven verification flow used for the SPI Master test in Phase-1.
+
+## 1. Navigate to Standalone Test Directory
+
+#### First, navigate to the directory containing all standalone tests.
+
+    cd /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/dv/tests-standalone
+
+### List all the available tests:
+    ls
+
+#### Output:
+    debug
+    gpio_mgmt
+    irq
+    mem
+    spi_master
+    timer
+    uart
+
+## 2. Running Individual Block Tests
+
+### For each block, the following steps were executed:
+
+- 1.	Navigate to the block directory
+- 2.	Clean previous build files
+- 3.	Run the simulation using make
+ 
+### commands used:
+   
+	make clean
+    make 
+	
+#### The simulation output prints whether the test passes or fails.
+
+#### In PHASE-1 we already performed the test for spi_master in this phase we test the remaining standalone tests modules 
+
+    debug
+    gpio_mgmt
+    irq
+    mem
+    timer
+    uart
+
+#### in the directory of tests-standalone 
+
+    cd /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/dv/tests-standalone
+
+#### go to the indivisual standalone tests module and very wheather the tests fails/pass 
+     set GCC_PATH=/usr/bin
+	 echo 'export GCC_PATH=/usr/bin' >> ~/.bashrc
+
+### cd gpio_mgmt
+        make clean
+        make
+#### Result:
+    Monitor: Test Mgmt GPIO (RTL) Passed
+	
+<img width="1102" height="145" alt="gpio passed" src="https://github.com/user-attachments/assets/a8378a24-ad86-4544-97ea-ed6fd1d8d76c" />
+
+### cd ../mem
+   
+	make clean
+    make
+
+#### Result: 
+     Monitor: Test MEM (RTL) [byte w word r] passed
+	 
+<img width="1040" height="146" alt="mem passed" src="https://github.com/user-attachments/assets/ef17762a-de98-4c2e-a8da-af694300da19" />
+
+### cd ../uart
+
+    make clean
+    make
+
+#### Result:
+    Monitor: Test UART (RTL) passed
+	
+<img width="1052" height="148" alt="uart passed" src="https://github.com/user-attachments/assets/21e99c81-0063-4c09-a3cc-acb66845ead3" />
+
+### cd ../timer
+
+    make clean
+    make
+
+#### Result:
+    
+	Monitor: Timeout, Test GPIO (RTL) Failed
+
+<img width="1048" height="181" alt="timer failed" src="https://github.com/user-attachments/assets/6fe6703c-c986-4800-994c-b105881100c9" />
+
+
+### cd ../irq
+
+	make clean
+	make
+#### Result:
+    Monitor: Timeout, Test IRQ (RTL) Failed  
+	
+<img width="1030" height="188" alt="irq failed" src="https://github.com/user-attachments/assets/3d6a6cc1-7128-423b-9460-c27f9156c3c3" />
+
+
+### cd ../debug
+   
+	make clean
+    make
+
+#### Result:
+
+Monitor: Timeout, Test Debug (RTL) Failed
+
+<img width="1033" height="174" alt="debug failed " src="https://github.com/user-attachments/assets/34016d37-fe4e-4941-b950-e63ebf32bd6f" />
+
+
+
+## Reasons for Tests PASS
+- •	Firmware executed correctly and interacted properly with the hardware block.
+- •	RTL hardware module responded correctly to control signals.
+- •	Testbench detected the expected behavior of the module.
+- •	Simulation finished within the allowed time without timeout.
+
+### Tests passed modules successfully : spi_master, gpio_mgmt, mem, uart
+
+
+
+## Reasons for Tests FAIL
+- •	Simulation timeout occurred because the expected event did not happen.
+- •	Firmware–hardware interaction did not complete properly.
+- •	Processor configuration mismatch for some modules.
+- •	Standalone environment limitations, where some blocks require full system integration.
+	
+### Tests failed modules : timer, irq, debug
+
+
+
+
 
 
