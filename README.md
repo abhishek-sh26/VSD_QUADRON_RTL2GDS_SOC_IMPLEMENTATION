@@ -674,24 +674,24 @@ The export command is used to set environment variables in the current shell ses
 <summary><strong>PHASE-1 — Standalone Block Verification </strong></summary>
 
 ## In this phase, the following tasks were performed:
-	- •	Clone the VSDSquadron SoC repository
-	- •	Setup the verification environment
-	- •	Run standalone block verification tests
-	- •	Understand the Makefile-based verification flow
-	- •	Execute the SPI Master test
-	- •	Analyze the simulation output
-	- •	Understand how PASS / FAIL is determined
+	 •	Clone the VSDSquadron SoC repository
+	 •	Setup the verification environment
+	 •	Run standalone block verification tests
+	 •	Understand the Makefile-based verification flow
+	 •	Execute the SPI Master test
+	 •	Analyze the simulation output
+	 •	Understand how PASS / FAIL is determined
 
 ## 1. Repository Setup
 ### The first step was cloning the official repository.
 
-    - git clone https://github.com/vsdip/vsdsquadron-soc
-    - cd vsdsquadron-soc
+     git clone https://github.com/vsdip/vsdsquadron-soc
+     cd vsdsquadron-soc
 
   
 
 ### Switch to the required branch used in the workshop:
-    - git checkout add-vsdsquadron-soc-folders
+     git checkout add-vsdsquadron-soc-folders
 
 
 ## 2. Install Required Tools
@@ -703,22 +703,22 @@ The export command is used to set environment variables in the current shell ses
 •	Make utility
 
 ### Install them using:
-     - sudo apt update
-     - sudo apt install iverilog gcc-riscv64-unknown-elf make
+      sudo apt update
+      sudo apt install iverilog gcc-riscv64-unknown-elf make
 
 ### Verify installation:
 #### iverilog -V
 - **output** : Icarus Verilog version 12.0 (stable) ()
-- 
+ 
 #### riscv64-unknown-elf-gcc --version
 - **output** : riscv64-unknown-elf-gcc (13.2.0-11ubuntu1+12) 13.2.0
 
 ## 3. Navigate to Verification Directory
 ### Standalone verification tests are located in:
-    - cd caravel_mgmt_soc_litex/verilog/dv/tests-standalone
+     cd caravel_mgmt_soc_litex/verilog/dv/tests-standalone
 
 ### List available tests:
-    - ls
+     ls
 
 - **output** :
   debug  generated  gpio_mgmt  irq  Makefile  mem  run-all.sh  run.sh  spi_master  timer  uart
@@ -730,47 +730,47 @@ The export command is used to set environment variables in the current shell ses
 ## 4. Fix Repository Path Expectations
 
 ### The Makefiles in the verification environment expect the repository to exist in the following location:
-    - /home/vsduser/
+     /home/vsduser/
   
 ### the repository was cloned in the local system at:
-    - /home/abhishek/Desktop/vsdsquadron-soc
+     /home/abhishek/Desktop/vsdsquadron-soc
 
 ### To resolve this path mismatch, symbolic links were created so that the Makefiles could locate the required design files.
 
 ### Commands used:
 sudo mkdir -p /home/vsduser
 
-    - sudo ln -s /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex /home/vsduser/caravel_mgmt_soc_litex
+     sudo ln -s /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex /home/vsduser/caravel_mgmt_soc_litex
 
-      - sudo ln -s /home/abhishek/Desktop/vsdsquadron-soc/caravel /home/vsduser/caravel
+       sudo ln -s /home/abhishek/Desktop/vsdsquadron-soc/caravel /home/vsduser/caravel
 
 ## 5. Fix Missing SRAM Model
 
 ### While running the simulation, the following error occurred:
-    - sky130_sram_2kbyte_1rw1r_32x512_8.v: No such file or directory
+     sky130_sram_2kbyte_1rw1r_32x512_8.v: No such file or directory
 
 ### This happened because the SRAM model required for simulation was not present in the repository.
 
 ### To resolve this issue, a placeholder SRAM model file was created.
 
 #### Command used:
-    - mkdir -p /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/cvc-pdk
-    - touch /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/cvc-pdk/sky130_sram_2kbyte_1rw1r_32x512_8.v
+     mkdir -p /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/cvc-pdk
+     touch /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/cvc-pdk/sky130_sram_2kbyte_1rw1r_32x512_8.v
 
 ### This allowed the Verilog simulator to compile the design hierarchy successfully.
 
 
 ## 6. Navigate to Standalone Tests
-    - cd /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/dv/tests-standalone
+     cd /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/dv/tests-standalone
 
 ## 7. Run SPI Master Test (Task-1)
-    - cd spi_master
+     cd spi_master
   
 ### Clean previous build files:
-    - make clean
+     make clean
     
 ### Run the simulation:
-    - make
+     make
 
 ## 8. Simulation Output
 
@@ -792,10 +792,10 @@ sudo mkdir -p /home/vsduser
 ## These files confirm that the firmware compilation and RTL simulation were executed successfully as part of the standalone verification flow.
 
 ## To veiw waveform of the output install gtkwave
-    - sudo apt install gtkwave
+      sudo apt install gtkwave
   
 ## after installaton completed successfully veiw output with following command :
-    - gtkwave RTL-spi_master.vcd spi_master.gtkw
+      gtkwave RTL-spi_master.vcd spi_master.gtkw
 
 <img width="1212" height="198" alt="gtkwave spi_master" src="https://github.com/user-attachments/assets/ba08dd26-c460-4e89-beb2-ea91c7167f4d" />
 
@@ -813,16 +813,81 @@ sudo mkdir -p /home/vsduser
 ### This step generates the compiled firmware executable:
     - spi_master.elf
 - The .elf file contains the machine instructions that will run on the simulated processor.
+### This spi_master.elf cannot seen in lists because the Makefile deletes it automatically at the end of the run.
+
+## Step 2 — ELF to HEX Conversion
+
+### The compiled ELF file is converted into a memory initialization file.
+### The .hex file is used to load the firmware into the simulated memory during the simulation process.
+
+## Step 3 — Verilog Compilation
+### The RTL design files and the verification testbench are compiled using the Icarus Verilog simulator.
+
+### This step compiles all Verilog source files and generates the simulation executable:
+
+    spi_master.vvp
+### Makefile automatically deletes intermediate files after simulation, including:
+    
+	spi_master.elf
+    spi_master.vvp
 
 
+## Step 4 — Simulation Execution
+
+### The compiled simulation is executed using the Verilog runtime simulator:
+
+    vvp spi_master.vvp
+
+## During this stage:
+
+- •	The firmware (spi_master.hex) is loaded into memory.
+- •	The testbench starts the simulation.
+- •	The processor executes the firmware instructions.
+- •	Hardware signals are simulated cycle-by-cycle.
+
+### A waveform file is also generated:
+   
+	RTL-spi_master.vcd
+
+## Step 5 — PASS / FAIL Detection
+
+### The testbench monitors specific debug registers and conditions to determine whether the test passed or failed.
+
+### PASS output Example:
+
+    Monitor: Test SPI Master (RTL) Passed
+
+### FAIL output Example:
+
+    Monitor: Timeout, Test SPI Master (RTL) Failed
 
 
+## Verification Flow Summary (SPI Master Standalone Test)
 
+### The standalone verification flow is controlled by a Makefile-based build system.
+### When the make command is executed, several steps are performed sequentially to compile firmware, prepare the simulation environment, run the simulator, and determine the verification result.
 
+## Overall Verification Flow
 
+### The complete verification flow can be summarized as:
 
+    make
+      ↓
+    Firmware Compilation (spi_master.c → spi_master.elf)         [Temporary File]
+      ↓
+    ELF to HEX Conversion (spi_master.elf → spi_master.hex)      [Permanent File]
+      ↓
+    Verilog Compilation (iverilog → spi_master.vvp)              [Temporary File]
+      ↓
+    Simulation Execution (vvp spi_master.vvp)
+      ↓
+    Waveform Generation (RTL-spi_master.vcd)                     [Permanent File]
+      ↓
+    Disassembly Generation (spi_master.lst)                      [Permanent File]
+      ↓
+    Cleanup of Temporary Files (spi_master.elf, spi_master.vvp removed)
 
-
+	
 
 
 
