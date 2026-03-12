@@ -888,6 +888,25 @@ sudo mkdir -p /home/vsduser
     Cleanup of Temporary Files (spi_master.elf, spi_master.vvp removed)
 
 	
+## Importance of Standalone Block Verification for Physical Design Engineers
 
+### In modern System-on-Chip (SoC) development, the design process follows several stages starting from RTL design to final silicon fabrication. One of the most important early steps in this process is functional verification of the RTL design. The standalone verification tests provided in the VSDSquadron SoC repository are intended to validate the functionality of individual hardware blocks before the design moves to the physical implementation stage.
+
+### Although Physical Design engineers mainly work on the implementation of the RTL into silicon layout, it is still essential for them to understand the functional verification flow. This ensures that the design they are implementing physically is functionally correct and ready for synthesis and layout.
+
+
+## Role of Verification Before Physical Design
+
+### In the ASIC design flow, the general sequence of stages is:
+
+    RTL Design → Functional Verification → Synthesis → Floorplanning → Placement → Clock Tree Synthesis → Routing → Signoff → Tapeout
+
+
+</details>
+
+<details>
+<summary><strong>PHASE-2 - Running All Standalone Tests </strong></summary>
+
+## In Phase-2, the objective is to execute verification tests for all hardware blocks present in the tests-standalone directory. Each block is tested independently using the same Makefile-driven verification flow used for the SPI Master test in Phase-1.
 
 
