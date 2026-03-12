@@ -1070,19 +1070,17 @@ Monitor: Timeout, Test Debug (RTL) Failed
 
 ## 
 
-+------------+--------+
-| tests-standalone |status (sky130)|
-+------------+--------+
-| spi_master | PASS   |
-| gpio_mgmt  | PASS   |
-| mem        | PASS   |
-| uart       | PASS   |
-| timer      | FAIL   |
-| irq        | FAIL   |
-| debug      | FAIL   |
-+------------+--------+
-
-
+┌────────────┬────────┐
+│ Test Block │ Result │
+├────────────┼────────┤
+│ spi_master │ PASS   │
+│ gpio_mgmt  │ PASS   │
+│ mem        │ PASS   │
+│ uart       │ PASS   │
+│ timer      │ FAIL   │
+│ irq        │ FAIL   │
+│ debug      │ FAIL   │
+└────────────┴────────┘
 
 </details>
 
