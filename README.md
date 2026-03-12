@@ -970,6 +970,12 @@ sudo mkdir -p /home/vsduser
 	
 <img width="1102" height="145" alt="gpio passed" src="https://github.com/user-attachments/assets/a8378a24-ad86-4544-97ea-ed6fd1d8d76c" />
 
+#### waveform 
+    gtkwave RTL-gpio_mgmt.vcd gpio_mgmt.gtkw
+	
+<img width="1213" height="756" alt="gpio mgmt wave" src="https://github.com/user-attachments/assets/528a093c-fc89-4594-bc9a-804624c23a40" />
+
+
 ### cd ../mem
    
 	make clean
@@ -980,6 +986,13 @@ sudo mkdir -p /home/vsduser
 	 
 <img width="1040" height="146" alt="mem passed" src="https://github.com/user-attachments/assets/ef17762a-de98-4c2e-a8da-af694300da19" />
 
+#### waveform 
+
+	   gtkwave RTL-mem.vcd mem.gtkw
+   
+<img width="1214" height="756" alt="mem waveform" src="https://github.com/user-attachments/assets/fd1d09f9-51f5-4785-bc19-26cee77ee643" />
+
+
 ### cd ../uart
 
     make clean
@@ -989,6 +1002,12 @@ sudo mkdir -p /home/vsduser
     Monitor: Test UART (RTL) passed
 	
 <img width="1052" height="148" alt="uart passed" src="https://github.com/user-attachments/assets/21e99c81-0063-4c09-a3cc-acb66845ead3" />
+
+#### waveform 
+
+      gtkwave RTL-uart.vcd uart.gtkw
+
+<img width="1217" height="755" alt="uart waveform" src="https://github.com/user-attachments/assets/f14e6b05-c5df-45c1-b3ac-ed9d2778ea2b" />
 
 ### cd ../timer
 
@@ -1023,25 +1042,38 @@ Monitor: Timeout, Test Debug (RTL) Failed
 
 <img width="1033" height="174" alt="debug failed " src="https://github.com/user-attachments/assets/34016d37-fe4e-4941-b950-e63ebf32bd6f" />
 
+#### waveform 
+
+	 gtkwave RTL-debug.vcd debug.gtkw
+
+<img width="1215" height="750" alt="debug waveform" src="https://github.com/user-attachments/assets/023533d9-1b7e-40e3-ba4d-dd6822b11a1f" />
+
 
 
 ## Reasons for Tests PASS
-- •	Firmware executed correctly and interacted properly with the hardware block.
-- •	RTL hardware module responded correctly to control signals.
-- •	Testbench detected the expected behavior of the module.
-- •	Simulation finished within the allowed time without timeout.
+- Firmware executed correctly and interacted properly with the hardware block.
+- RTL hardware module responded correctly to control signals.
+- Testbench detected the expected behavior of the module.
+- Simulation finished within the allowed time without timeout.
 
 ### Tests passed modules successfully : spi_master, gpio_mgmt, mem, uart
 
 
-
 ## Reasons for Tests FAIL
-- •	Simulation timeout occurred because the expected event did not happen.
-- •	Firmware–hardware interaction did not complete properly.
-- •	Processor configuration mismatch for some modules.
-- •	Standalone environment limitations, where some blocks require full system integration.
+- Simulation timeout occurred because the expected event did not happen.
+- Firmware–hardware interaction did not complete properly.
+- Processor configuration mismatch for some modules.
+- Standalone environment limitations, where some blocks require full system integration.
 	
 ### Tests failed modules : timer, irq, debug
+
+
+
+</details>
+
+<details>
+<summary><strong>PHASE-3 - Caravel Integrated Tests </strong></summary>
+
 
 
 
