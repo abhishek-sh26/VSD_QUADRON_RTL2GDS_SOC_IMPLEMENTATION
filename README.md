@@ -1285,12 +1285,12 @@ Monitor: Timeout, Test Debug (RTL) Failed
 | hkspi_power      | PASS   |
 | gpio_mgmt        | PASS   |
 | hkspi            | PASS   |
-```
 
-**Summary**
+
+Summary
 
 ```
-Total Tests : 13
-Passed      : 11
-Failed      : 2
+- Total Tests : 13
+- Passed      : 11
+- Failed      : 2
 ```
