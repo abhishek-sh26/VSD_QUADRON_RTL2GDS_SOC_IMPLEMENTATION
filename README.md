@@ -1270,24 +1270,21 @@ Monitor: Timeout, Test Debug (RTL) Failed
 
 ## Phase-2: Caravel DV Test Results
 
-```
-+-------------------+-------------------------------------------+--------+
-| Test Name         | Description                               | Status |
-+-------------------+-------------------------------------------+--------+
-| status            | Basic system status verification          | PASS   |
-| user_pass_thru    | User project pass-through IO check        | PASS   |
-| uart              | UART communication functionality          | PASS   |
-| sysctrl           | System control register verification      | FAIL   |
-| sram_exec         | SRAM program execution test               | PASS   |
-| spi_master        | SPI master interface functionality        | PASS   |
-| pullupdown        | IO pull-up / pull-down configuration test | PASS   |
-| pll               | Phase Locked Loop functionality           | FAIL   |
-| pass_thru_fix     | Pass-through signal routing verification  | PASS   |
-| mem               | Memory read/write verification            | PASS   |
-| hkspi_power       | Housekeeping SPI power configuration      | PASS   |
-| gpio_mgmt         | GPIO management interface test            | PASS   |
-| hkspi             | Housekeeping SPI communication            | PASS   |
-+-------------------+-------------------------------------------+--------+
+| tests-caravel    | sky130 |
+|------------------|--------|
+| status           | PASS   |
+| user_pass_thru   | PASS   |
+| uart             | PASS   |
+| sysctrl          | FAIL   |
+| sram_exec        | PASS   |
+| spi_master       | PASS   |
+| pullupdown       | PASS   |
+| pll              | FAIL   |
+| pass_thru_fix    | PASS   |
+| mem              | PASS   |
+| hkspi_power      | PASS   |
+| gpio_mgmt        | PASS   |
+| hkspi            | PASS   |
 ```
 
 **Summary**
