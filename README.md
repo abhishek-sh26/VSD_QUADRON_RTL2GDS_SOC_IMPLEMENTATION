@@ -1116,7 +1116,152 @@ Monitor: Timeout, Test Debug (RTL) Failed
 	hkspi
 
 	
+#### In the directory of tests-caravel
+### 2. go to the indivisual caravel tests module and very wheather the tests fails/pass
+
+    cd ~/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/dv/tests-caravel
+
+### cd user_pass_thru
+
+    make clean
+	make 
+
+#### Result:
+
+    Monitor: Test HK SPI Pass-thru (RTL) Passed
+
+<img width="1093" height="152" alt="caravel user pass thru  " src="https://github.com/user-attachments/assets/d489421e-03fb-418e-8943-21dc5ad975fa" />
+	
+
+### cd ../uart
+
+    make clean
+	make 
+
+#### Result:
+
+    UART Test (RTL) passed
+
+<img width="1088" height="151" alt="caravel uart " src="https://github.com/user-attachments/assets/69e50340-9f7f-4b7b-aaa5-888238a7aa17" />
+
+
+### cd ../sysctrl
+
+    make clean
+    make
+
+#### Result:
+
+    Monitor: Timeout, Test Sysctrl (RTL) Failed
+
+
+<img width="1006" height="159" alt="caravel sysctrl" src="https://github.com/user-attachments/assets/38fa57ea-2ff0-4741-a2fc-e8d6394a7da9" />
+
+
+### cd ../sram_exec
+
+    make clean
+    make
+
+#### Result:
+
+    Monitor: Test SRAM exec (RTL) Passed
+
+<img width="1068" height="152" alt="caravel sram exec" src="https://github.com/user-attachments/assets/0b9554a9-5c7c-45c4-ba5d-b1d8171bcdf5" />
+
+
+### cd ../spi_master
+
+    make clean
+    make
+
+#### Result:
+
+    Monitor: Test SPI Master (RTL) Passed
+
+<img width="1053" height="142" alt="caravel spi master" src="https://github.com/user-attachments/assets/c6021068-5b29-43ca-a913-e54674aeceb4" />
+
+### cd ../pullupdown
+
+    make clean
+    make
+
+#### Result:
+
+    Monitor: GPIO 37-32 pull-up/down check passed
+
+<img width="1061" height="197" alt="caravel pull updown " src="https://github.com/user-attachments/assets/9bc7decc-8907-4c90-bedd-63c3833b2295" />
+
+
+### cd ../pll
+
+    make clean
+    make
+
+#### Result:
+
+    Monitor: Test PLL Failed
+	
+<img width="977" height="140" alt="caravel pll" src="https://github.com/user-attachments/assets/cf4fa9e0-db91-4ce5-8567-3345793ba440" />
 
 
 
 
+### cd ../pass_thru_fix
+
+    make clean
+    make
+
+#### Result:
+
+    Monitor: Test HK SPI Pass-thru fix (RTL) Passed
+
+<img width="1080" height="143" alt="caravel pass through fix" src="https://github.com/user-attachments/assets/91c469e7-9f9e-4a90-b2ae-4274c00df0ae" />
+
+
+### cd ../mem
+
+    make clean
+    make
+
+#### Result:
+
+    Monitor: Test MEM (RTL) [byte w word r] passed
+
+<img width="987" height="145" alt="caravel mem passed" src="https://github.com/user-attachments/assets/879b2f04-d8ed-454c-b680-36b8e79fed63" />
+
+
+### cd ../hkspi_power
+
+    make clean
+    make
+
+#### Result:
+
+     Monitor: Test HK SPI (RTL) Passed
+
+<img width="1070" height="142" alt="caravel hkspi power" src="https://github.com/user-attachments/assets/e9cec646-4da3-40ea-9a90-7116c9a5ef0f" />
+
+
+### cd ../gpio_mgmt
+    
+	make clean
+    make
+
+#### Result:
+
+    Monitor: Test Mgmt GPIO (RTL) Passed  
+
+<img width="1039" height="137" alt="caravel gpio mgmt" src="https://github.com/user-attachments/assets/d3513969-2a57-445c-b1f8-bd8b4fe703c5" />
+
+
+### cd ../hkspi    
+	
+	make clean
+    make
+
+#### Result:
+
+    Monitor: Test HK SPI (RTL) Passed
+
+<img width="1000" height="141" alt="caravel hkspi" src="https://github.com/user-attachments/assets/ad550014-b614-4405-a390-70f99f5d0b3c" />
