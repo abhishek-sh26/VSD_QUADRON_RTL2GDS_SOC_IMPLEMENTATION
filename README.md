@@ -1092,31 +1092,139 @@ Monitor: Timeout, Test Debug (RTL) Failed
 
 ### The objective of Phase-3 is to verify the functionality of VSDSquadron SoC blocks within the Caravel integrated environment. In this phase, the hardware modules are tested together with the Caravel management system to ensure proper communication and system-level functionality before full SoC implementation.
 
+
+### 1. Tools Already Installed (from tests-standalone)
+
+#### 2.1 Icarus Verilog
+
+- Icarus Verilog is the RTL simulator used to compile and run Verilog simulations.
+
+      iverilog
+
+####  iverilog compiles:
+ -	Caravel RTL
+ -	SKY130 standard cell models
+ -	Testbench files
+
+
+#### 2.2 RISC-V GCC Toolchain
+
+- The firmware for DV tests is compiled using the RISC-V cross-compiler.
+
+  
+      riscv64-unknown-elf-gcc
+
+
+### 3. Installing SKY130 PDK (New Step for Caravel Tests)
+
+- Caravel RTL references SKY130 standard cell libraries.
+- These libraries were missing initially, so the SKY130 PDK was installed using Volare.
+  
+#### 3.1 Clone Volare (PDK Manager)
+
+    cd ~
+    git clone https://github.com/efabless/volare.git
+    cd volare
+
+#### 3.2 Install Volare
+
+    pip3 install -e . --break-system-packages
+    
+
+#### 3.3 List Available SKY130 Versions
+
+    volare ls-remote
+
+- This shows available SKY130 releases.	
+
+
+#### 3.4 Enable SKY130 PDK
+
+- A stable SKY130 release was installed:
+
+      volare enable 0fe599b2afb6708d281543108caf8310912f54af
+
+
+#### 3.5 PDK Installation Location
+
+- The SKY130 PDK was installed at:
+
+
+      ~/.volare/sky130A
+
+- Important library directory:
+
+      ~/.volare/sky130A/libs.ref
+
+- This directory contains:
+
+      sky130_fd_io
+      sky130_fd_sc_hd
+      sky130_fd_sc_hvl
+
+- These libraries contain Verilog models for standard cells and IO pads.
+
+### 4. Setting PDK Environment Variable
+
+- To allow tools to locate the PDK, the environment variable was set:
+
+      export PDK_ROOT=$HOME/.volare
+
+- Added permanently:
+
+      echo 'export PDK_ROOT=$HOME/.volare' >> ~/.bashrc
+      source ~/.bashrc
+
+- Verification:  
+
+      echo $PDK_ROOT
+
+- Output:
+
+      /home/abhishek/.volare
+
+### 5. Fixing PDK Path in Repository
+
+- The repository originally referenced a workshop environment path:
+
+      /home/vsduser/.ciel
+
+- This path was replaced with the correct PDK location:
+
+
+      sed -i "s|/home/vsduser/.ciel|$PDK_ROOT|g" $(grep -rl ".ciel" /home/abhishek/Desktop/vsdsquadron-soc)
+
+
+
+### 6. Starting Caravel Tests
+
 ### 1. Navigate to the Caravel test directory
 
     cd ~/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/dv/tests-caravel
 
-#### Check available test folders:
+ - Check available test folders:
 
  <img width="1102" height="152" alt="cd ls caravel tests" src="https://github.com/user-attachments/assets/8f8d6fe4-f193-40eb-b6d2-c6d6a932fce5" />
 
- #### The actual caravel tests should be run 
-    user_pass_thru
-    uart
-    sysctrl
-    sram_exec
-    spi_master
-    pullupdown
-    pll
-	pass_thru_fix
-	pass_thru
-	mem
-	hkspi_power
-	gpio_mgmt
-	hkspi
+ -  The actual caravel tests should be run 
+
+        user_pass_thru
+	    uart
+	    sysctrl
+	    sram_exec
+	    spi_master
+	    pullupdown
+	    pll
+		pass_thru_fix
+		pass_thru
+		mem
+		hkspi_power
+		gpio_mgmt
+		hkspi
 
 	
 #### In the directory of tests-caravel
+
 ### 2. go to the indivisual caravel tests module and very wheather the tests fails/pass
 
     cd ~/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/dv/tests-caravel
@@ -1294,3 +1402,41 @@ Summary
   Passed      : 11
   Failed      : 2
 ```
+
+
+### 7. tests-caravel Simulation Flow
+
+#### Each Caravel test performs the following steps:
+
+- 1.	Compile firmware using RISC-V GCC
+- 2.	Generate executable .elf
+- 3.	Convert .elf → .hex
+- 4.	Compile Caravel RTL + SKY130 libraries using iverilog
+- 5.	Run simulation
+- 6.	Generate waveform .vcd
+- 7.	Print pass/fail status
+ 
+
+### 8. Output Files Generated
+
+- Each test produces:
+
+      *.elf  → compiled firmware
+      *.hex  → memory image
+      *.vvp  → simulation binary
+      *.vcd  → waveform file
+      *.lst  → firmware disassembly
+
+
+
+
+</details>
+
+<details>
+<summary><strong>PHASE-4 - Verification Flow Understanding </strong></summary>
+
+
+
+  
+
+
