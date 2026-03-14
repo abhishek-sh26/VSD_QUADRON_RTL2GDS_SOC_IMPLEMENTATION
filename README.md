@@ -1418,7 +1418,31 @@ Summary
       *.vcd  → waveform file
       *.lst  → firmware disassembly
 
+### Reason for PASS / FAIL in DV Tests
 
+- During simulation, the testbench checks whether the Design Under Test (DUT) behaves as expected.
+- Based on this verification, the test result is marked as PASS or FAIL.
+
+## PASS
+    
+	Monitor: Test Passed
+
+### A test is marked PASS when:
+
+- The DUT produces the expected output signals.
+- The firmware running on the RISC-V core executes correctly.
+- The testbench detects the correct result and prints a success message.
+
+
+## FAIL
+
+    Monitor: Test Failed
+
+### A test is marked FAIL when:
+
+- The DUT output does not match the expected behavior.
+- The firmware execution does not complete correctly.
+- The testbench detects an error or a timeout occurs
 
 
 </details>
@@ -1455,6 +1479,8 @@ Summary
 
 - The Makefile internally runs iverilog to compile the simulation.
 
+- Explanation:
+
 |    Parameter             |             Description        |
 |--------------------------|--------------------------------|
 | -y                       |       RTL library directory    |
@@ -1467,16 +1493,133 @@ Summary
 
 
 
+### 3. Files Compiled During Simulation
+
+- During simulation, the following types of files are compiled.
+
+#### Firmware
+
+
+|File                     | Description|
+|---------------------- |----------------|
+|spi_master.c           |  Test firmware|
+|start_caravel_vexriscv.s| Boot assembly code
+
+- Output:
+
+      spi_master.elf
+      spi_master.hex
+
+#### RTL Design Files
+
+- These files represent the Caravel SoC RTL.
+
+#### SKY130 Standard Cell Models
+
+- These are required for simulation because the RTL references physical standard cells.
+
+#### These are located in:
+
+    ~/.volare/sky130A/libs.ref
+
+#### Testbench
+
+- Each DV test contains a testbench file.
+
+      spi_master_tb.v
+
+##### The testbench is responsible for:
+
+  - Generating clock signals
+  -	Applying reset
+  - Driving inputs
+  -	Monitoring outputs
+    
+
+### 4. How the Testbench Interacts with the DUT
+
+- The testbench instantiates the DUT (Design Under Test) and drives the simulation.
+
+#### DUT
+
+- The DUT is the Caravel user project wrapper.
+
+      __user_project_wrapper.v
+
+### Testbench Role
+
+- The testbench performs:
+
+| Function                       |  Description |
+|-------------------------------|----------------------|
+| Clock generation                | Creates system clock |
+| Reset control                   | Initializes the design |
+| Input stimulus                 | Sends signals to DUT |
+| Monitoring                   | Checks expected outputs |
+
+
+### 5. Simulation Execution
+
+- After compilation, the simulator executes the compiled simulation file:
+
+      .vvp
+
+#### During simulation:
+
+- Firmware runs inside the VexRiscv processor
+- The testbench monitors DUT signals
+- Simulation produces a waveform file:
+
+       .vcd
 
 
 
+### 6. How PASS / FAIL is Determined
+
+#### The testbench contains monitor logic that checks the expected output conditions.
+ 
+ - If the expected condition is satisfied:
+
+        PASS
+
+ - If the expected condition fails or timeout occurs:
+
+        FAIL
+
+ - The simulation then stops using:
+
+        $finish
+
+
+### 7. Verification Flow    
+
+- Each test follows the same verification flow.
+
+        Makefile
+           ↓
+        Firmware Compilation
+           ↓
+        RTL + Library Compilation
+		   ↓
+		Testbench Execution
+		   ↓
+		DUT (Design Under Test)
+		   ↓
+		Simulation
+		   ↓
+		Result (PASS / FAIL)
 
 
 
+## Conclusion
+
+- In this workshop, both tests-standalone and tests-caravel verification environments were successfully set up and executed. The required tools such as Icarus Verilog, RISC-V GCC toolchain, and the SKY130 PDK (installed using Volare) were configured to enable simulation of the Caravel SoC design.
 
 
+### 1.	Tests-Standalone:
 
+- Standalone tests were executed to verify individual modules using simple testbenches. This helped understand the basic simulation flow using RISC-V GCC for firmware compilation and Icarus Verilog for RTL simulation.
 
+### 2.	Tests-Caravel:
 
-
-
+- Caravel DV tests verified the full Caravel SoC environment using the SKY130 PDK installed via Volare. The Makefile controlled the verification flow from compilation to simulation, where the testbench interacted with the DUT and produced PASS/FAIL results confirming correct functionality.
