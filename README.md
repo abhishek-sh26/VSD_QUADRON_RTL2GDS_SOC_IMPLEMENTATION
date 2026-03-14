@@ -814,8 +814,11 @@ sudo mkdir -p /home/vsduser
 
 ### The firmware program (spi_master.c) is compiled using the RISC-V cross compiler.
 ### This step generates the compiled firmware executable:
+
     - spi_master.elf
+	
 - The .elf file contains the machine instructions that will run on the simulated processor.
+- 
 ### This spi_master.elf cannot seen in lists because the Makefile deletes it automatically at the end of the run.
 
 ## Step 2 — ELF to HEX Conversion
@@ -1162,7 +1165,7 @@ Monitor: Timeout, Test Debug (RTL) Failed
       sky130_fd_sc_hd
       sky130_fd_sc_hvl
 
-- These libraries contain Verilog models for standard cells and IO pads.
+- * These libraries contain Verilog models for standard cells and IO pads.
 
 ### 4. Setting PDK Environment Variable
 
