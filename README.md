@@ -1407,20 +1407,8 @@ Summary
 ```
 
 
-### 7. tests-caravel Simulation Flow
 
-#### Each Caravel test performs the following steps:
-
-- 1.	Compile firmware using RISC-V GCC
-- 2.	Generate executable .elf
-- 3.	Convert .elf → .hex
-- 4.	Compile Caravel RTL + SKY130 libraries using iverilog
-- 5.	Run simulation
-- 6.	Generate waveform .vcd
-- 7.	Print pass/fail status
- 
-
-### 8. Output Files Generated
+### 7. Output Files Generated
 
 - Each test produces:
 
@@ -1439,7 +1427,56 @@ Summary
 <summary><strong>PHASE-4 - Verification Flow Understanding </strong></summary>
 
 
+#### Objective
 
-  
+- The objective of this phase is to understand the verification flow used in Caravel DV tests.
+- This includes understanding how the Makefile executes the simulation flow, how the testbench interacts with the DUT, and how the PASS/FAIL result is generated.
+
+
+### 1. What Happens When make is Executed
+
+- When the make command is executed inside a test directory, the Makefile automatically performs several steps required to run the verification.
+
+      make
+
+
+#### The Makefile performs the following sequence:
+
+- 1.	Compile the firmware using the RISC-V GCC toolchain.
+- 2.	Convert the compiled firmware into a memory hex file.
+- 3.	Compile the RTL design, SKY130 libraries, and testbench using Icarus Verilog.
+- 4.	Run the simulation.
+- 5.	Generate waveform files.
+- 6.	Print the PASS or FAIL result
+ 
+
+
+### 2. How the Makefile Invokes the Simulator
+
+- The Makefile internally runs iverilog to compile the simulation.
+
+|    Parameter             |             Description        |
+|--------------------------|--------------------------------|
+| -y                       |       RTL library directory    |
+| -I                       |         Include directory      |
+| -f                       | File list used for compilation |
+| -o                       |    Output simulation file      |
+| .vvp                     | Compiled simulation executable |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
