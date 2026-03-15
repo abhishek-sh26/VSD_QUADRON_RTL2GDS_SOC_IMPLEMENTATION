@@ -893,7 +893,32 @@ sudo mkdir -p /home/vsduser
       ↓
     Cleanup of Temporary Files (spi_master.elf, spi_master.vvp removed)
 
-	
+
+
+## Hand-drawn block diagram for verification flow 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Importance of Standalone Block Verification for Physical Design Engineers
 
 ### In modern System-on-Chip (SoC) development, the design process follows several stages starting from RTL design to final silicon fabrication. One of the most important early steps in this process is functional verification of the RTL design. The standalone verification tests provided in the VSDSquadron SoC repository are intended to validate the functionality of individual hardware blocks before the design moves to the physical implementation stage.
