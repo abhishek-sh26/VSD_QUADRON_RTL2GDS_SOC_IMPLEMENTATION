@@ -1403,7 +1403,7 @@ Monitor: Timeout, Test Debug (RTL) Failed
 
 
 
-## Phase-2: Caravel DV Test Results
+## Phase-3: Caravel DV Test Results
 
 | tests-caravel    | sky130 |
 |------------------|--------|
