@@ -1658,6 +1658,8 @@ Summary
 
 ## WEEK-4 RTL-to-GDS Implementation of User Project Wrapper
 
+- **Objective** : The objective of Week 4 is to analyze and implement a complete RTL-to-GDSII physical design flow for a top-level SoC wrapper using OpenROAD Flow Scripts (ORFS). This includes understanding the wrapper hierarchy, identifying and organizing all required RTL files and their dependencies, configuring the ORFS environment, applying timing and design constraints for a 100 MHz target, and successfully generating all key physical design outputs such as synthesis, floorplanning, placement, clock tree synthesis, routing, final GDSII, and timing reports.
+  
 </details>
 <details>
 <summary><strong>PHASE 1 — Analyze the Top-Level Wrapper </strong></summary>
