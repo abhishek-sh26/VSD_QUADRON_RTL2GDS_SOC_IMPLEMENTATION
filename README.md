@@ -1649,6 +1649,10 @@ Summary
 - Caravel DV tests verified the full Caravel SoC environment using the SKY130 PDK installed via Volare. The Makefile controlled the verification flow from compilation to simulation, where the testbench interacted with the DUT and produced PASS/FAIL results confirming correct functionality.
 
 
+---
 
+## WEEK-4 RTL-to-GDS Implementation of User Project Wrapper
 
+<details>
+<summary><strong> PHASE-1 — Analyze the Top-Level Wrapper </strong></summary>
 
