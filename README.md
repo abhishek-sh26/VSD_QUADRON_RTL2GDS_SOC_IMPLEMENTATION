@@ -1663,3 +1663,130 @@ Summary
 </details>
 <details>
 <summary><strong>PHASE 1 — Analyze the Top-Level Wrapper </strong></summary>
+
+## Study of user_project_wrapper
+
+- user_project_wrapper is the top-level module that connects design to the Caravel SoC system.
+
+## The Wrapper contains?
+
+
+### 1. Power Pins
+
+- These provide power supply and ground connections for analog and digital domains.
+
+       vdda1, vdda2 → 3.3V analog supply  
+       vssa1, vssa2 → analog ground  
+       vccd1, vccd2 → 1.8V digital supply  
+       vssd1, vssd2 → digital ground  
+
+
+### 2. Wishbone Bus (Communication)
+
+- Used for communication between the user design and the SoC (processor/system bus).
+
+
+      wb_clk_i → clock signal  
+	  wb_rst_i → reset signal  
+	  wbs_stb_i → strobe signal  
+	  wbs_cyc_i → cycle signal  
+	  wbs_we_i → write enable  
+	  wbs_sel_i → byte select  
+	  wbs_dat_i → input data  
+	  wbs_adr_i → address input  
+	  wbs_ack_o → acknowledge output  
+	  wbs_dat_o → output data  
+
+
+### 3. Logic Analyzer Interface
+
+- Used for debugging and observing internal signals.
+
+      la_data_in → input signals from logic analyzer  
+      la_data_out → output signals to logic analyzer  
+      la_oenb → output enable control
+
+
+
+### 4. GPIO Interface (Digital I/O)
+
+- Connects the design to external pins.
+
+      io_in → input pins  
+      io_out → output pins  
+      io_oeb → output enable (controls direction)
+
+
+### 5. Analog I/O
+
+- Used for analog signal connections to GPIO pads.
+
+      analog_io → analog input/output pins
+
+### 4. Clock Input
+
+- Provides clock to the design.
+
+      wb_clk_i  
+      user_clock2
+
+## Task
+
+### 1. modules instantiated in the wrapper
+
+     - debug_regs
+
+### 2. Hierarchy of the design
+
+     debug_regs.v
+
+- No submodules inside
+- Only registers and logic
+
+###  3. Locating required RTL files
+
+- use command to find module name or else find it manually by opening file
+
+#### with cpmmand 
+
+      grep -r "module debug_regs" 
+
+- output :
+
+      debug_regs.v
+
+ ### 4. compilation dependencies
+
+- Compilation Order:
+
+      1. debug_regs.v
+      2. user_project_wrapper.v
+  
+
+  ### Dependancy tree of the wrapper
+
+       user_project_wrapper
+        └── debug_regs
+
+
+ <img width="1050" height="84" alt="dependancy tree" src="https://github.com/user-attachments/assets/bb9a166c-d3b0-4d68-ad78-53732c8b7794" />
+
+
+### List of RTL files used in the design 
+
+- ls __user_project_wrapper.v debug_regs.v 
+
+      user_project_wrapper.v
+      debug_regs.v
+
+
+<img width="1236" height="86" alt="ls RTL files" src="https://github.com/user-attachments/assets/aa36315e-848d-43b0-b3bf-851de73eb8ba" />
+
+
+- Wrapper uses only debug_regs
+- debug_regs has no submodules
+
+
+### Module Hierarchy Explanation
+
+- The user_project_wrapper acts as the top-level module of the design. It instantiates the debug_regs module, which handles the internal logic. Since the debug_regs module does not contain any further submodules, the overall design forms a simple two-level hierarchy with the wrapper at the top and the debug module below.
