@@ -1913,3 +1913,69 @@ Summary
 
 🔹 Conclusion
 - This phase ensured that the design was fully prepared and ready for physical implementation in the subsequent stages.
+
+
+
+
+</details>
+<details>
+<summary><strong>PHASE-3 Timing Constraint Setup for 100 MHz Operation </strong></summary>
+
+
+- The objective of this phase is to define and apply a clock constraint for the design to achieve a target operating frequency of 100 MHz, corresponding to a clock period of 10 ns.
+
+## ✅ Constraint File Used
+
+### A timing constraint file constraint.sdc was created to define the clock for the design. The following command was used:
+
+    create_clock -name clk -period 10 [get_ports wb_clk_i]
+
+
+<img width="1227" height="147" alt="connecting timing" src="https://github.com/user-attachments/assets/320112b7-ea8d-4d5f-bb31-441cb7c540e7" />
+
+
+- This constraint specifies a clock with a 10 ns period, ensuring that the design is synthesized and optimized for 100 MHz operation.
+
+
+
+## ✅ Identification of Clock Port
+
+### The clock port was identified by analyzing the top-level RTL module user_project_wrapper.v.
+
+- The following input port was selected as the clock signal:
+
+      input wb_clk_i,
+  
+
+<img width="1240" height="162" alt="clock identify " src="https://github.com/user-attachments/assets/5ad3ad62-d2a5-4e4a-a797-bda3a39bd617" />
+
+
+- This port was chosen because it serves as the primary clock input driving the internal logic and modules in the design.
+
+
+## ✅ Confirmation of Constraint Recognition
+
+
+- The successful application of the clock constraint was verified during the ORFS flow execution. The synthesis stage recognized and applied the constraint without any errors, confirming correct integration.
+
+
+#### constraint.sdc file connected to the ORFS flow through the config.mk file.
+
+
+<img width="894" height="389" alt="constraint sdc highlight" src="https://github.com/user-attachments/assets/a8dfdcaa-16fc-4957-860c-76c20aedc11c" />
+
+
+#### During the synthesis stage, the ORFS flow reads the constraint file and applies the defined clock settings.
+
+
+<img width="1123" height="135" alt="write sdc" src="https://github.com/user-attachments/assets/8140293a-c4ce-4027-807a-e5153d823500" />
+
+
+<img width="936" height="402" alt="1_synth sdc" src="https://github.com/user-attachments/assets/b2e28dd7-e0bd-457d-9e64-f9d2657a66d4" />
+
+
+### This ensures that:
+- The constraint file was properly linked
+- The clock port was correctly identified
+- The timing constraint was applied during the flow
+
