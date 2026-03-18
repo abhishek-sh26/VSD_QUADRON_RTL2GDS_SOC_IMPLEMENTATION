@@ -1798,14 +1798,14 @@ Summary
 
 - In this phase, the OpenROAD Flow Scripts (ORFS) environment was configured to enable the physical design flow for the user_project_wrapper.
 
-## Design Workspace Setup
+✅ Design Workspace Setup
 
 - A new design directory named week4_soc_wrapper was created inside the ORFS designs directory. The workspace was structured to support the integration of RTL files and configuration required for the flow.
 
 <img width="1225" height="101" alt="mkdir week4 direcory" src="https://github.com/user-attachments/assets/7fe320cd-ed64-403a-9438-40f02705111c" />
 
 
-## RTL Integration
+✅ RTL Integration
 
 ### Based on the hierarchy identified in Phase 1, the required RTL files were copied into the src directory:
 	
@@ -1830,7 +1830,7 @@ Summary
 
 
 
-## Configuring the Design Name and Top Module
+✅ Configuring the Design Name and Top Module
 
 - The design name and top module were configured in the config.mk file by setting user_project_wrapper as the top module. This ensures that ORFS starts the synthesis and implementation flow from the correct entry point of the design.
 
@@ -1840,7 +1840,7 @@ Summary
 
 
 
-## Connecting Timing Constraints
+✅ Connecting Timing Constraints
 
 - A timing constraint file constraint.sdc was created and connected to the ORFS flow to define the clock signal:
 
@@ -1850,7 +1850,7 @@ Summary
 <img width="1227" height="147" alt="connecting timing" src="https://github.com/user-attachments/assets/1820af54-2675-4e7c-a21a-d4cf48a67965" />
 
 
-## ORFS Project Structure
+✅ ORFS Project Structure
 
 #### The final directory structure prepared for the design is:
 
@@ -1874,7 +1874,7 @@ Summary
 
      
 
-## Synthesis Runs Without Missing Modules
+✅ Synthesis Runs Without Missing Modules
 
 #### After configuring the design and integrating the RTL files, the ORFS flow was executed to verify that synthesis runs successfully without any missing module errors.
 
