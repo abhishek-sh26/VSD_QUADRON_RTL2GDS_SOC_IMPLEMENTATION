@@ -1817,6 +1817,13 @@ Summary
 
 #### These files form the complete design required for synthesis.
 
+### The integration process involved:
+
+- Identifying required RTL files from the wrapper hierarchy
+- Copying all dependent modules into the src directory
+- Defining RTL file paths in VERILOG_FILES
+- Setting include directories for macro definitions
+
 
 ### To ensure successful synthesis, necessary modifications were made to the wrapper:
 	
@@ -1836,6 +1843,7 @@ Summary
 
 #### The config.mk file was created to define the design parameters required by ORFS. The key configurations used are shown below:
 
+
 <img width="1234" height="440" alt="config" src="https://github.com/user-attachments/assets/6552d30b-592d-402c-9472-910532f645a3" />
 
 
@@ -1847,7 +1855,9 @@ Summary
       create_clock -name clk -period 10 [get_ports wb_clk_i]
 
 
+
 <img width="1227" height="147" alt="connecting timing" src="https://github.com/user-attachments/assets/1820af54-2675-4e7c-a21a-d4cf48a67965" />
+
 
 
 ## ✅ ORFS Project Structure
@@ -1864,8 +1874,11 @@ Summary
 	           ├── config.mk
 	           └── constraint.sdc
 			   
+			   
 
 <img width="1117" height="271" alt="orfs tree" src="https://github.com/user-attachments/assets/9b8b9765-f33c-4161-a842-7123e97d6251" />
+
+
 
 
 - src/ → Contains all RTL files required for synthesis
@@ -1880,7 +1893,11 @@ Summary
 
     make DESIGN_CONFIG=designs/week4_soc_wrapper/config.mk do-1_synth
 
+	
+
 <img width="1235" height="472" alt="synth success" src="https://github.com/user-attachments/assets/ec4dd107-0243-4636-b678-6a6838a2e729" />
+
+
 
 #### The synthesis stage completed successfully, confirming that:
 	
