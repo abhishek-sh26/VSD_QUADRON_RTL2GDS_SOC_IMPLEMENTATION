@@ -1662,7 +1662,7 @@ Summary
   
 </details>
 <details>
-<summary><strong>PHASE 1 — Analyze the Top-Level Wrapper </strong></summary>
+<summary><strong>PHASE - 1 Analyze the Top-Level Wrapper </strong></summary>
 
 ## Study of user_project_wrapper
 
@@ -1790,3 +1790,109 @@ Summary
 ### Module Hierarchy Explanation
 
 - The user_project_wrapper acts as the top-level module of the design. It instantiates the debug_regs module, which handles the internal logic. Since the debug_regs module does not contain any further submodules, the overall design forms a simple two-level hierarchy with the wrapper at the top and the debug module below.
+
+
+</details>
+<details>
+<summary><strong>PHASE-2 Prepare the ORFS Design Environment </strong></summary>
+
+- In this phase, the OpenROAD Flow Scripts (ORFS) environment was configured to enable the physical design flow for the user_project_wrapper.
+
+## Design Workspace Setup
+
+- A new design directory named week4_soc_wrapper was created inside the ORFS designs directory. The workspace was structured to support the integration of RTL files and configuration required for the flow.
+
+<img width="1225" height="101" alt="mkdir week4 direcory" src="https://github.com/user-attachments/assets/7fe320cd-ed64-403a-9438-40f02705111c" />
+
+
+## RTL Integration
+
+### Based on the hierarchy identified in Phase 1, the required RTL files were copied into the src directory:
+	
+- user_project_wrapper.v
+- debug_regs.v
+- user_defines.v
+
+#### Additionally, the wrapper file was renamed from __user_project_wrapper.v to user_project_wrapper.v for compatibility with ORFS.
+
+#### These files form the complete design required for synthesis.
+
+
+### To ensure successful synthesis, necessary modifications were made to the wrapper:
+	
+- Included macro definitions using user_defines.v
+- Defined missing macro MPRJ_IO_PADS
+- Removed unsupported analog ports
+- Corrected syntax issues in the port list
+
+
+#### These changes ensured that the design became compatible with the ORFS digital flow.
+
+
+
+## Configuring the Design Name and Top Module
+
+- The design name and top module were configured in the config.mk file by setting user_project_wrapper as the top module. This ensures that ORFS starts the synthesis and implementation flow from the correct entry point of the design.
+
+#### The config.mk file was created to define the design parameters required by ORFS. The key configurations used are shown below:
+
+<img width="1234" height="440" alt="config" src="https://github.com/user-attachments/assets/6552d30b-592d-402c-9472-910532f645a3" />
+
+
+
+## Connecting Timing Constraints
+
+- A timing constraint file constraint.sdc was created and connected to the ORFS flow to define the clock signal:
+
+      create_clock -name clk -period 10 [get_ports wb_clk_i]
+
+
+<img width="1227" height="147" alt="connecting timing" src="https://github.com/user-attachments/assets/1820af54-2675-4e7c-a21a-d4cf48a67965" />
+
+
+## ORFS Project Structure
+
+#### The final directory structure prepared for the design is:
+
+    flow/
+	 └── designs/
+	      └── week4_soc_wrapper/
+	           ├── src/
+	           │    ├── user_project_wrapper.v
+	           │    ├── debug_regs.v
+	           │    └── user_defines.v
+	           ├── config.mk
+	           └── constraint.sdc
+			   
+
+<img width="1117" height="271" alt="orfs tree" src="https://github.com/user-attachments/assets/9b8b9765-f33c-4161-a842-7123e97d6251" />
+
+
+- src/ → Contains all RTL files required for synthesis
+- config.mk → Defines design name, RTL paths, and flow parameters
+- constraint.sdc → Provides timing constraints (clock definition)
+
+     
+
+## Synthesis Runs Without Missing Modules
+
+#### After configuring the design and integrating the RTL files, the ORFS flow was executed to verify that synthesis runs successfully without any missing module errors.
+
+    make DESIGN_CONFIG=designs/week4_soc_wrapper/config.mk do-1_synth
+
+<img width="1235" height="472" alt="synth success" src="https://github.com/user-attachments/assets/ec4dd107-0243-4636-b678-6a6838a2e729" />
+
+#### The synthesis stage completed successfully, confirming that:
+	
+- All required RTL files were correctly included
+- Module dependencies were properly resolved
+- The top module was correctly configured
+
+🔹 Setup Validation
+- The configuration was validated by successfully initiating the ORFS flow without any missing module or path errors.
+
+🔹 small fixes 
+- During setup, minor compatibility issues such as missing macro definitions and unsupported analog ports were resolved to ensure smooth execution in the ORFS environment.
+
+🔹 Conclusion
+- This phase ensured that the design was fully prepared and ready for physical implementation in the subsequent stages.
