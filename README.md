@@ -2214,17 +2214,17 @@ All key outputs required for gate-level verification and final design validation
 
 ### 1. Missing Macro Definition (MPRJ_IO_PADS)
 
-* Issue:
-* 
+#### Issue:
+ 
 - The synthesis stage failed due to an undefined macro MPRJ_IO_PADS.
 
-* Identification:
+#### Identification:
   
 Observed error during synthesis:
 
       ERROR: undefined macro `MPRJ_IO_PADS
 
-* Resolution:
+#### Resolution:
   
 - Included user_defines.v and defined the macro manually:
 
@@ -2234,15 +2234,15 @@ Observed error during synthesis:
 
 ### 2. Missing RTL Dependencies
 
-* Issue:
+#### Issue:
 
 - The design failed to compile due to missing dependent modules.
 
-* Identification:
+#### Identification:
 
 - Errors indicating missing modules during synthesis.
 
-* Resolution:
+#### Resolution:
 
 - Identified required modules from wrapper hierarchy and added:
 
@@ -2253,15 +2253,15 @@ Observed error during synthesis:
 
 ### 3. SDC File Not Defined
 
-* Issue:
+#### Issue:
 
 - Flow failed with missing timing constraint error.
 
-* Identification:
+#### Identification:
 
       can't read "::env(SDC_FILE)"
 
-* Resolution:
+#### Resolution:
 
 Created constraint.sdc and linked it in config.mk:
 
@@ -2271,16 +2271,16 @@ Created constraint.sdc and linked it in config.mk:
 
 ### 4. Floorplan Configuration Error
 
-* Issue:
+#### Issue:
 
 - Floorplan stage failed due to conflicting initialization methods.
 
-* Identification:
+#### Identification:
 
       Floorplan initialization methods are mutually exclusive
 
-
-* Resolution:
+ 
+#### Resolution:
 
 - Removed conflicting floorplan settings and kept only one valid configuration.
 
@@ -2288,16 +2288,16 @@ Created constraint.sdc and linked it in config.mk:
 
 ### 5. IO Placement Error
 
-* Issue:
+#### Issue:
 
 - Number of IO pins exceeded available placement positions.
 
-* Identification:
+#### Identification:
 
       Number of IO pins exceeds maximum positions
 
 
-* Resolution:
+#### Resolution:
 
 - Increased die/core area in configuration to accommodate IO pins.
 
@@ -2305,15 +2305,15 @@ Created constraint.sdc and linked it in config.mk:
 
 ### 6. Placement Failure (DPL-0033)
 
-* Issue:
+#### Issue:
 
 - Detailed placement failed during placement stage.
 
-* Identification:
+#### Identification:
 
       [ERROR DPL-0033] detailed placement checks failed
 
-* Resolution:
+#### Resolution:
 
 - Adjusted floorplan parameters and ensured proper IO and core sizing.
 
@@ -2321,15 +2321,15 @@ Created constraint.sdc and linked it in config.mk:
 
 ### 7. Unsupported Analog Ports
 
-* Issue:
+#### Issue:
 
 - Analog IO caused placement errors.
 
-* Identification:
+#### Identification:
 
 - Errors related to analog_io not being placed.
 
-* Resolution:
+#### Resolution:
 
 - Commented out unsupported analog ports in the wrapper.
 
@@ -2337,15 +2337,15 @@ Created constraint.sdc and linked it in config.mk:
 
 ### 8. Incorrect File Paths
 
-* Issue:
+#### Issue:
 
 - Flow failed due to incorrect RTL file paths.
 
-* Identification:
+#### Identification:
 
       No rule to make target ... user_project_wrapper.v
 
-* Resolution:
+#### Resolution:
 
 - Corrected paths in config.mk to point to proper src directory.
 
