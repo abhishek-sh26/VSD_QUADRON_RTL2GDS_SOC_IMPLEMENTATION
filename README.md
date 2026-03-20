@@ -2200,3 +2200,164 @@ Summary
 
 All key outputs required for gate-level verification and final design validation were successfully generated and verified from the implementation flow.
   
+
+
+</details>
+<details>
+<summary><strong>PHASE-6 Debugging and Issue Resolution</strong></summary>
+
+- The objective of this phase is to document the issues encountered during the RTL-to-GDSII implementation flow and describe how they were identified and resolved.
+
+## Issues Encountered and Resolutions
+
+
+
+### 1. Missing Macro Definition (MPRJ_IO_PADS)
+
+* Issue:
+* 
+- The synthesis stage failed due to an undefined macro MPRJ_IO_PADS.
+
+* Identification:
+  
+Observed error during synthesis:
+
+      ERROR: undefined macro `MPRJ_IO_PADS
+
+* Resolution:
+  
+- Included user_defines.v and defined the macro manually:
+
+      `define MPRJ_IO_PADS 38
+
+
+
+### 2. Missing RTL Dependencies
+
+* Issue:
+
+- The design failed to compile due to missing dependent modules.
+
+* Identification:
+
+- Errors indicating missing modules during synthesis.
+
+* Resolution:
+
+- Identified required modules from wrapper hierarchy and added:
+
+      • debug_regs.v
+	  • user_defines.v
+
+
+
+### 3. SDC File Not Defined
+
+* Issue:
+
+- Flow failed with missing timing constraint error.
+
+* Identification:
+
+      can't read "::env(SDC_FILE)"
+
+* Resolution:
+
+Created constraint.sdc and linked it in config.mk:
+
+      export SDC_FILE = $(DESIGN_HOME)/week4_soc_wrapper/constraint.sdc
+
+
+
+### 4. Floorplan Configuration Error
+
+* Issue:
+
+- Floorplan stage failed due to conflicting initialization methods.
+
+* Identification:
+
+      Floorplan initialization methods are mutually exclusive
+
+
+* Resolution:
+
+- Removed conflicting floorplan settings and kept only one valid configuration.
+
+
+
+### 5. IO Placement Error
+
+* Issue:
+
+- Number of IO pins exceeded available placement positions.
+
+* Identification:
+
+      Number of IO pins exceeds maximum positions
+
+
+* Resolution:
+
+- Increased die/core area in configuration to accommodate IO pins.
+
+
+
+### 6. Placement Failure (DPL-0033)
+
+* Issue:
+
+- Detailed placement failed during placement stage.
+
+* Identification:
+
+      [ERROR DPL-0033] detailed placement checks failed
+
+* Resolution:
+
+- Adjusted floorplan parameters and ensured proper IO and core sizing.
+
+
+
+### 7. Unsupported Analog Ports
+
+* Issue:
+
+- Analog IO caused placement errors.
+
+* Identification:
+
+- Errors related to analog_io not being placed.
+
+* Resolution:
+
+- Commented out unsupported analog ports in the wrapper.
+
+
+
+### 8. Incorrect File Paths
+
+* Issue:
+
+- Flow failed due to incorrect RTL file paths.
+
+* Identification:
+
+      No rule to make target ... user_project_wrapper.v
+
+* Resolution:
+
+- Corrected paths in config.mk to point to proper src directory.
+
+## Key Learnings from Debugging
+
+- Importance of correct RTL hierarchy
+- Proper macro definitions are critical
+- Timing constraints must be defined early
+- Floorplan configuration affects entire flow
+- Debugging logs is essential in physical design
+
+
+## Summary
+
+#### Multiple issues were encountered during the implementation process, including missing dependencies, configuration errors, and flow failures. Each issue was systematically analyzed using log files and resolved through appropriate modifications. This process provided valuable hands-on experience in debugging and flow optimization in physical design.
