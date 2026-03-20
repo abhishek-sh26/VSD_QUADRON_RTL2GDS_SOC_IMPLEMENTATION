@@ -2220,7 +2220,7 @@ All key outputs required for gate-level verification and final design validation
 
 #### Identification:
   
-Observed error during synthesis:
+- Observed error during synthesis:
 
       ERROR: undefined macro `MPRJ_IO_PADS
 
@@ -2263,7 +2263,7 @@ Observed error during synthesis:
 
 #### Resolution:
 
-Created constraint.sdc and linked it in config.mk:
+- Created constraint.sdc and linked it in config.mk:
 
       export SDC_FILE = $(DESIGN_HOME)/week4_soc_wrapper/constraint.sdc
 
