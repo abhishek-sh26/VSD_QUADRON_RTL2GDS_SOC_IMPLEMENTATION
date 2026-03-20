@@ -1979,3 +1979,144 @@ Summary
 - The clock port was correctly identified
 - The timing constraint was applied during the flow
 
+
+
+
+</details>
+<details>
+<summary><strong>PHASE-4 Run the RTL-to-GDS Flow </strong></summary>
+
+- The objective of this phase is to execute the complete RTL-to-GDSII flow using OpenROAD Flow Scripts (ORFS) and generate all required design outputs for the given design.
+
+### Flow Execution
+
+#### The full ORFS flow was executed using the following command:
+
+    make DESIGN_CONFIG=designs/week4_soc_wrapper/config.mk
+
+
+<img width="1148" height="541" alt="RTL2GDS run" src="https://github.com/user-attachments/assets/7e57d8e3-effb-44f8-8747-8fded29b7950" />
+
+
+- This command performs all stages from synthesis to final GDS generation.
+
+#### The ORFS flow was executed successfully, completing all required stages:
+
+    - Synthesis
+	- Floorplanning
+	- Placement
+	- Clock Tree Synthesis (CTS)
+	- Routing
+	- Fill Insertion
+	- Final Database Generation
+	- Final GDS Generation
+
+## 1. Synthesis
+
+- Synthesis converts the RTL (Verilog code) into a gate-level netlist using standard cells, while considering timing constraints.
+  
+<img width="1223" height="387" alt="synth final " src="https://github.com/user-attachments/assets/fc237b22-5182-4e74-b51b-27a0fd00f869" />
+
+
+## 2. Floorplanning
+
+- Floorplanning defines the physical layout of the chip, including core area, IO placement, and power network.
+
+  <img width="959" height="231" alt="Screenshot 2026-03-20 at 3 29 54 PM" src="https://github.com/user-attachments/assets/dbff22bf-3d8e-4fe4-9b28-bb8df3662baa" />
+
+### Floorplan layout 
+
+
+    make DESIGN_CONFIG=designs/week4_soc_wrapper/config.mk gui_floorplan
+
+
+<img width="1234" height="630" alt="FP final" src="https://github.com/user-attachments/assets/e575c48c-4880-4172-9256-1bb7442cf956" />
+
+
+## 3. Placement
+
+- Placement arranges all standard cells inside the core area in an optimized way to reduce delay and congestion.
+  
+  
+<img width="984" height="213" alt="place final " src="https://github.com/user-attachments/assets/0ed5b4bd-96c5-496d-bfe3-751cfda19c89" />
+
+### placement layout
+
+    make DESIGN_CONFIG=designs/week4_soc_wrapper/config.mk gui_place
+
+
+<img width="1234" height="633" alt="Screenshot 2026-03-20 at 3 54 24 PM" src="https://github.com/user-attachments/assets/c3ba2629-2e6e-4f43-9c91-842ac4bef111" />
+
+
+## 4. Clock Tree Synthesis (CTS)
+
+
+- CTS builds a clock distribution network so the clock signal reaches all parts of the design with minimal delay and skew.
+
+
+<img width="1050" height="229" alt="cts final " src="https://github.com/user-attachments/assets/8acf1016-125a-4f69-ab24-87702a1709a1" />
+
+
+## 5. Routing
+
+- Routing connects all placed cells using metal wires through global and detailed routing stages.
+
+
+<img width="1241" height="293" alt="route final " src="https://github.com/user-attachments/assets/2ab0dc28-eefb-4553-ba5d-c3e1fefce1d8" />
+
+
+### route layout
+
+    make DESIGN_CONFIG=designs/week4_soc_wrapper/config.mk gui_route
+	
+
+<img width="1235" height="629" alt="Screenshot 2026-03-20 at 3 55 46 PM" src="https://github.com/user-attachments/assets/fdea60b4-201a-4e91-a861-8c742700a307" />
+
+
+## 6. Fill Insertion
+
+- Fill cells are inserted into empty spaces to satisfy manufacturing rules and ensure uniform density.
+
+
+<img width="1229" height="295" alt="fill final" src="https://github.com/user-attachments/assets/08473f20-9f41-4265-be12-86834ed153bd" />
+
+
+<img width="1192" height="325" alt="fill cell final " src="https://github.com/user-attachments/assets/c3eefc64-aa35-4585-84ec-7094bc480ae0" />
+
+
+- Fill cells were successfully inserted into the design to ensure proper density and manufacturability.
+
+  
+## 7. Final GDS Generation
+
+
+- GDSII is the final layout file of the chip that is sent for fabrication.
+
+      klayout 6_final.gds
+  
+
+<img width="1280" height="800" alt="final gds" src="https://github.com/user-attachments/assets/9713b1f5-c6ec-49d9-8ba9-13ed9d4b3718" />
+
+
+## 8. Final Timing Report
+
+
+- Timing reports verify whether the design meets the required clock timing (100 MHz) and check for delays or violations.
+
+      6_finish.rpt
+  
+
+  <img width="846" height="676" alt="time report 1" src="https://github.com/user-attachments/assets/22d48138-3915-43b9-b5a4-2000cb32bded" />
+  
+
+<img width="667" height="673" alt="setup slack 3" src="https://github.com/user-attachments/assets/b4c92d3e-1130-4551-a2ba-cb48c68a827a" />
+
+
+<img width="646" height="660" alt="hold slack 2" src="https://github.com/user-attachments/assets/44a9ff13-b0ea-4fd8-a192-b6c7276c9657" />
+
+
+## Flow Completion Summary
+
+#### The complete RTL-to-GDSII flow was successfully executed using OpenROAD Flow Scripts (ORFS). All stages including synthesis, floorplanning, placement, clock tree synthesis, routing, fill insertion, and final database generation were completed without errors.
+
+#### The design outputs such as the final GDSII layout, timing reports, and design database were successfully generated, confirming correct flow execution.
