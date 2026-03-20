@@ -2120,3 +2120,83 @@ Summary
 #### The complete RTL-to-GDSII flow was successfully executed using OpenROAD Flow Scripts (ORFS). All stages including synthesis, floorplanning, placement, clock tree synthesis, routing, fill insertion, and final database generation were completed without errors.
 
 #### The design outputs such as the final GDSII layout, timing reports, and design database were successfully generated, confirming correct flow execution.
+
+
+</details>
+<details>
+<summary><strong>PHASE-5 Output Generation for Gate-Level Verification</strong></summary>
+
+
+- The objective of this phase is to collect the key outputs generated during the RTL-to-GDSII implementation flow and document their purpose and location for gate-level verification.
+
+- Each artifact was identified based on the stage at which it is generated and documented along with its corresponding file location in the flow directory.
+
+### 1. Synthesized Netlist
+- Purpose: Represents the logic of the design after synthesis using standard cells
+- Generated during: Synthesis stage
+
+#### Location:
+
+    /Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/user_project_wrapper/base/1_2_yosys.v
+
+
+### 2. Final Netlist
+- Purpose: Represents the complete netlist after placement, routing, and optimizations
+- Generated during: Final stage
+
+#### Location:
+
+    /Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/user_project_wrapper/base/6_final.v
+
+### 3. Routed Database
+- Purpose: Contains the fully routed design with all interconnections
+- Generated during: Routing stage
+
+#### Location:
+
+    /Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/user_project_wrapper/base/5_2_route.odb
+
+
+
+### 4. Final Filled Database
+- Purpose: Final design database after fill insertion, used for verification and signoff
+- Generated during: Fill / merge stage
+
+#### Location:
+
+    /Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/user_project_wrapper/base/6_final.odb
+
+### 5. GDSII (Final Layout)
+- Purpose: Final physical layout file used for fabrication
+- Generated during: Final stage
+
+#### Location:
+
+    /Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/user_project_wrapper/base/6_final.gds
+  
+### 6. Timing Report
+- Purpose: Provides setup and hold timing analysis of the design
+- Generated during: Final reporting stage
+
+#### Location:
+
+    /Desktop/vsd-scl180-orfs/orfs/flow/reports/sky130hd/user_project_wrapper/base/6_finish.rpt
+
+
+## Final Output Summary
+
+| Output | Description | Generated Stage | File Path |
+|--------|------------|----------------|-----------|
+| Synthesized Netlist | Logic representation after synthesis | Synthesis | /Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/user_project_wrapper/base/1_2_yosys.v |
+| Final Netlist | Netlist after complete physical design | Final | /Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/user_project_wrapper/base/6_final.v |
+| Routed Database | Physical design after routing | Routing | /Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/user_project_wrapper/base/5_2_route.odb |
+| Final Filled Database | Final database after fill insertion | Fill/Merge | /Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/user_project_wrapper/base/6_final.odb |
+| GDSII Layout | Final chip layout for fabrication | Final | /Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/user_project_wrapper/base/6_final.gds |
+| Timing Report | Setup and hold timing analysis | Reporting | /Desktop/vsd-scl180-orfs/orfs/flow/reports/sky130hd/user_project_wrapper/base/6_finish.rpt |
+
+---
+
+## Summary
+
+All key outputs required for gate-level verification and final design validation were successfully generated and verified from the implementation flow.
+  
