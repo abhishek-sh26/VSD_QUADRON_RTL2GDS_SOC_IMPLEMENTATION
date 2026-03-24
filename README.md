@@ -2448,6 +2448,7 @@ The objective of this phase is to locate and prepare the appropriate gate-level 
 	
 <img width="1227" height="136" alt="cp proof" src="https://github.com/user-attachments/assets/12d6a3a1-24ed-4f5e-8838-c18651f04de6" />
 
+- No differences observed, confirming the copied file matches the original netlist.
 
 ## How the correct netlist was chosen
 
