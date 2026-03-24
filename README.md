@@ -2361,3 +2361,79 @@ All key outputs required for gate-level verification and final design validation
 ## Summary
 
 #### Multiple issues were encountered during the implementation process, including missing dependencies, configuration errors, and flow failures. Each issue was systematically analyzed using log files and resolved through appropriate modifications. This process provided valuable hands-on experience in debugging and flow optimization in physical design.
+
+
+
+
+</details>
+
+
+---
+
+</details>
+
+## WEEK-5 Gate-Level Simulation (GLS) for Full Block Verification
+
+- The objective is to perform Gate-Level Simulation (GLS) by replacing RTL with the synthesized netlist, re-running verification testcases, and validating functional consistency between RTL and gate-level behavior.
+
+</details>
+<details>
+<summary><strong>PHASE - 1 Prepare Gate-Level Netlist Integration </strong></summary>
+
+The objective of this phase is to locate and prepare the appropriate gate-level netlist generated in Week–4 and ensure it is ready for Gate-Level Simulation (GLS).
+
+## Tasks Performed
+
+### The correct netlist file to be used for GLS
+
+#### The design was implemented in Week–4 using the ORFS flow:
+
+    make DESIGN_CONFIG=designs/week4_soc_wrapper/config.mk
+
+#### The corresponding logs were generated at:
+
+    orfs/flow/logs/sky130hd/user_project_wrapper/base/
+
+#### The implementation results were generated at:
+
+    orfs/flow/results/sky130hd/user_project_wrapper/base/
+
+#### The final gate-level netlist identified is:
+
+    orfs/flow/results/sky130hd/user_project_wrapper/base/6_final.v
+
+- This file represents the fully synthesized and routed design and is selected as the input for Gate-Level Simulation (GLS).
+
+### All required dependencies for simulation were ensured:
+
+- Standard cell libraries used during synthesis (sky130hd)
+- Supporting modules required for simulation
+
+#### During integration of the netlist into the Caravel GLS environment, missing dependent modules were identified:
+
+- RAM128  
+- RAM256  
+- VexRiscv  
+- DFFRAM  
+
+#### These dependencies were resolved by including appropriate functional models required for successful compilation in the simulation environment.
+
+
+### Verify that the netlist is simulation-ready
+
+#### The netlist was verified by compiling it in the GLS environment:
+
+      make SIM=GL
+
+- The netlist was confirmed to be simulation-ready as it compiles successfully without missing module errors after resolving all dependencies.
+
+## Path used to netlist
+
+    orfs/flow/results/sky130hd/user_project_wrapper/base/6_final.v
+
+## How the correct netlist was chosen
+
+- The final gate-level netlist (`6_final.v`) was selected from the Week–4 ORFS results directory as it represents the post-synthesis and post-routing implementation of the `user_project_wrapper`. This netlist provides the complete gate-level description required for performing Gate-Level Simulation (GLS).
+
+
+  
