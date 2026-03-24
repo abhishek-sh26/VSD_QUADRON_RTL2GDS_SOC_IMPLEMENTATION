@@ -2408,6 +2408,11 @@ The objective of this phase is to locate and prepare the appropriate gate-level 
 
 - Standard cell libraries used during synthesis (sky130hd)
 - Supporting modules required for simulation
+- The generated gate-level netlist from the Week–4 ORFS flow was copied from the vsd-scl180 environment into the vsdsquadron (Caravel) verification environment to enable integration with the GLS testbench.
+
+
+  <img width="1226" height="73" alt="cp orfs to squadron" src="https://github.com/user-attachments/assets/768bf09f-c4ca-43a2-bb81-4c60cab1ccf1" />
+  
 
 #### During integration of the netlist into the Caravel GLS environment, missing dependent modules were identified:
 
@@ -2430,6 +2435,19 @@ The objective of this phase is to locate and prepare the appropriate gate-level 
 ## Path used to netlist
 
     orfs/flow/results/sky130hd/user_project_wrapper/base/6_final.v
+
+
+<img width="1226" height="73" alt="cp orfs to squadron" src="https://github.com/user-attachments/assets/2a08aa2c-5b40-4393-9b5f-b81464eef139" />
+
+### Verification of File Integrity
+
+     - ls user_project_wrapper_final.v
+	 
+    - diff ~/Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/user_project_wrapper/base/6_final.v \
+	~/Desktop/vsdsquadron-soc/caravel/verilog/gl/user_project_wrapper_final.v
+	
+<img width="1227" height="136" alt="cp proof" src="https://github.com/user-attachments/assets/12d6a3a1-24ed-4f5e-8838-c18651f04de6" />
+
 
 ## How the correct netlist was chosen
 
