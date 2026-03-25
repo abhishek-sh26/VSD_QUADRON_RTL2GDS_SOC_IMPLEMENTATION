@@ -2455,4 +2455,71 @@ The objective of this phase is to locate and prepare the appropriate gate-level 
 - The final gate-level netlist (`6_final.v`) was selected from the Week–4 ORFS results directory as it represents the post-synthesis and post-routing implementation of the `user_project_wrapper`. This netlist provides the complete gate-level description required for performing Gate-Level Simulation (GLS).
 
 
+</details>
+<details>
+<summary><strong>PHASE - 2 Modification of Verification Flow for GLS </strong></summary>
+
+- The objective of this phase is to update the existing verification Makefile from Week–3 by replacing RTL with the synthesized gate-level netlist and enabling Gate-Level Simulation (GLS), without creating a new flow.
+
+## Tasks Performed
+
+### Replace RTL file references with the synthesized gate-level netlist
+
+- The RTL wrapper used in the verification flow was replaced with the synthesized gate-level netlist generated in Week–4.
+
+#### Original RTL reference:
+
+    /home/vsduser/caravel/verilog/gl/__user_project_wrapper.v
+
+#### Updated Gate-Level Netlist reference:
+
+    /home/vsduser/caravel/verilog/gl/user_project_wrapper_final.v
+
+- This ensures that the existing verification flow now uses the synthesized netlist instead of RTL.
+
+
+### Ensure all dependent files required for simulation are included
+
+- During GLS integration, additional dependent modules required by the Caravel environment were identified and included:
+
+      /home/vsduser/caravel_mgmt_soc_litex/verilog/gl/RAM128.v  
+      /home/vsduser/caravel_mgmt_soc_litex/verilog/gl/RAM256.v  
+      /home/vsduser/caravel_mgmt_soc_litex/verilog/gl/VexRiscv.v  
+
+- These files were added to the existing Makefile to resolve dependency issues.
+
+
+### Ensure the simulator compiles the netlist correctly
+
+- The updated verification flow was executed from:
+
+      /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/dv/tests-standalone/uart
+
+#### Command used:
+
+      make SIM=GL
+
+- The simulator successfully compiled the design after updating the netlist reference and including required dependencies.
+
+
+### Ensure no missing module or library errors
+
+- Initial missing module errors were resolved by including the required source files.
+- The final compilation completed without unresolved module or library errors.
+
+
+### modified Makefile
+
+- The following snippet shows the updated GLS section of the existing Makefile where the RTL wrapper is replaced with the synthesized gate-level netlist and required dependent modules are included.
   
+
+<img width="1131" height="294" alt="modified makefile" src="https://github.com/user-attachments/assets/fa698900-b006-4139-b144-7091109a012e" />
+
+
+
+### Explanation of changes made
+
+- The RTL wrapper (`__user_project_wrapper.v`) was replaced with the synthesized gate-level netlist (`user_project_wrapper_final.v`) generated in Week–4.
+- Additional dependent modules (`RAM128.v`, `RAM256.v`, `VexRiscv.v`) required for the Caravel GLS environment were included in the Makefile.
+- The existing verification Makefile from Week–3 was modified to support GLS, without creating a new verification flow.
+- The updated flow successfully compiles the design without missing module or library errors.
