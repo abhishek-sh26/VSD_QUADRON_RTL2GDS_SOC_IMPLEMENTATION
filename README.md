@@ -1065,7 +1065,7 @@ sudo mkdir -p /home/vsduser
 
 #### Result:
 
-Monitor: Timeout, Test Debug (RTL) Failed
+    Monitor: Timeout, Test Debug (RTL) Failed
 
 <img width="1033" height="174" alt="debug failed " src="https://github.com/user-attachments/assets/34016d37-fe4e-4941-b950-e63ebf32bd6f" />
 
@@ -2523,3 +2523,131 @@ The objective of this phase is to locate and prepare the appropriate gate-level 
 - Additional dependent modules (`RAM128.v`, `RAM256.v`, `VexRiscv.v`) required for the Caravel GLS environment were included in the Makefile.
 - The existing verification Makefile from Week–3 was modified to support GLS, without creating a new verification flow.
 - The updated flow successfully compiles the design without missing module or library errors.
+
+</details>
+<details>
+<summary><strong>PHASE - 3 Runned GLS for Standalone Tests </strong></summary>
+
+- The objective of this phase is to perform Gate-Level Simulation (GLS) for all standalone tests and compare the results with RTL functional results obtained in Week–3.
+
+- This phase focuses on validating whether the synthesized gate-level netlist preserves the original RTL functionality.
+
+### All standalone tests are located in:  
+
+    /home/abhishek/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/dv/tests-standalone
+
+
+<img width="1176" height="71" alt="standalone ls" src="https://github.com/user-attachments/assets/4bebce72-ea4f-4b59-95c2-215b2e2b4ef3" />
+
+### Initial Approach
+
+- Each test was executed using the standard Makefile flow:
+
+      make clean 
+      make SIM=GL
+
+### However, due to missing dependencies and environment limitations, the Makefile-based GLS flow did not execute successfully.
+
+#### Therefore, GLS was performed manually using:
+
+- Gate-level netlist → `6_final.v`
+- Icarus Verilog (`iverilog`)
+- SKY130 standard cell libraries
+- Required RTL modules
+- Custom dummy models (spiflash, RAM)
+
+  
+### sky130 libraries included 
+
+    ~/.volare/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v
+    ~/.volare/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v
+
+
+
+## GLS Compilation Command
+	
+	iverilog -Ttyp -DFUNCTIONAL -DGL -DSIM -DUNIT_DELAY=#0 \
+	-y ~/Desktop/vsdsquadron-soc/caravel/verilog/rtl \
+	-y ~/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/rtl \
+	-I ~/Desktop/vsdsquadron-soc/caravel/verilog/rtl \
+	-I ~/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/rtl \
+	~/.volare/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v \
+	~/.volare/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v \
+	~/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/rtl/VexRiscv_MinDebug.v \
+	../spiflash.v ../fake_ram.v \
+	-o gl.vvp \
+	~/Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/user_project_wrapper/base/6_final.v \
+	<testbench>.v
+
+## GLS Simulation Run
+
+	vvp gl.vvp
+
+	for t in gpio_mgmt mem uart timer irq debug spi_master; do
+	  echo ""
+	  echo "=============================="
+	  echo "TEST: $t"
+	  echo "=============================="
+	
+	  cd $t
+	
+	  echo "--- RTL RESULT ---"
+	  make clean >/dev/null 2>&1
+	  make 2>&1 | grep "Monitor:"
+	
+	  echo "--- GLS RESULT ---"
+	
+	  TB=$(ls *_tb.v | head -n 1)
+	
+	  iverilog -Ttyp -DFUNCTIONAL -DGL -DSIM -DUNIT_DELAY=#0 \
+	  -y ~/Desktop/vsdsquadron-soc/caravel/verilog/rtl \
+	  -y ~/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/rtl \
+	  -I ~/Desktop/vsdsquadron-soc/caravel/verilog/rtl \
+	  -I ~/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/rtl \
+	  ~/.volare/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v \
+	  ~/.volare/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v \
+	  ~/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/rtl/VexRiscv_MinDebug.v \
+	  ../spiflash.v ../fake_ram.v \
+	  -o gl.vvp \
+	  ~/Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/user_project_wrapper/base/6_final.v \
+	  $TB
+	
+	  vvp gl.vvp | grep "Monitor:"
+	
+	  cd ..
+	done
+
+
+
+
+##  Standalone GLS Result Table
+
+| Test        | RTL Status (Week–3) | GLS Status |
+|------------|---------------------|------------|
+| GPIO Mgmt  | PASS                | PASS       |
+| mem        | PASS                | PASS       |
+| uart       | PASS                | PASS       |
+| timer      | FAIL                | FAIL       |
+| irq        | FAIL                | FAIL       |
+| debug      | FAIL                | FAIL       |
+| spi_master | PASS                | PASS       |
+
+
+
+##  Summary
+
+- Total Tests : 7
+- PASS        : 4
+- FAIL        : 3
+
+
+### The Gate-Level Simulation (GLS) was successfully executed for all standalone modules using the synthesized netlist.
+
+#### A comparison between RTL and GLS results shows complete consistency:
+
+- All modules that passed in RTL also passed in GLS
+- No functional mismatches were observed
+
+#### This confirms that the synthesized design preserves the original RTL functionality.
+
+- Through this phase, a clear understanding of post-synthesis verification, dependency handling, and manual GLS setup was achieved
