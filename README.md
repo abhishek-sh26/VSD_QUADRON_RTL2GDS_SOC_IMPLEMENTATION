@@ -2619,6 +2619,9 @@ The objective of this phase is to locate and prepare the appropriate gate-level 
 
 
 
+<img width="615" height="737" alt="stanalone tests " src="https://github.com/user-attachments/assets/2903e986-af64-498f-8d9b-12d6417ea2a3" />
+
+
 
 ##  Standalone GLS Result Table
 
