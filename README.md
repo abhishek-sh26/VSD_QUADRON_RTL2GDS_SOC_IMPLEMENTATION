@@ -2651,14 +2651,13 @@ The objective of this phase is to locate and prepare the appropriate gate-level 
 <details>
 <summary><strong>PHASE - 4 Runned GLS for Caravel Integrated Tests </strong></summary>
 
-## 📌 Objective
+## Objective
 
 - The objective of this phase is to perform Gate-Level Simulation (GLS) for all Caravel integrated tests and compare the results with RTL functional results obtained in Week–3.
 - This phase focuses on validating whether the synthesized gate-level netlist preserves the original RTL functionality at SoC level.
 
----
 
-## 📂 Test Location
+##  Test Location
 
 ### All Caravel tests are located in:
 
@@ -2772,4 +2771,170 @@ Therefore, validation was performed by:
 
 - The objective of GLS (functional equivalence check) is still satisfied because:
   - All PASS/FAIL results match RTL outputs  
-  - No functional deviation is observed  
+  - No functional deviation is observed
+ 
+
+</details>
+<details>
+<summary><strong>PHASE - 5 GTKWave Visualization</strong></summary>
+
+- The objective of this phase is to perform waveform-based analysis of the design using GTKWave.
+- This phase focuses on verifying signal propagation, timing relationships, and functional behavior through simulation waveforms.
+- It ensures that the design exhibits expected behavior by observing transitions of key signals over time.
+
+
+### Input
+- Waveform file generated from simulation:
+
+      wave.vcd 
+
+- The VCD file contains time-based signal transitions captured during simulation.
+
+
+### Visualization Tool
+- GTKWave was used to visualize the waveform.
+- It provides a graphical representation of signal transitions with respect to simulation time.
+
+
+### Test Used
+- UART test from Caravel integrated testbench.
+- This test was selected as it successfully generated waveform output for analysis.
+- It represents a valid functional scenario for observing signal activity.
+
+
+### Simulation Commands Used
+
+	cd ~/Desktop/vsdsquadron-soc/caravel_mgmt_soc_litex/verilog/dv/tests-caravel/uart
+	
+	iverilog -o sim.vvp uart_tb.v stubs.v
+	vvp sim.vvp
+	
+	gtkwave wave.vcd
+
+<img width="1235" height="769" alt="wave vcd" src="https://github.com/user-attachments/assets/3ef5a824-c822-4bce-a0f6-5d8ad05f7a2d" />
+
+### Analysis Methodology
+- The generated VCD file was opened in GTKWave.
+- Signal hierarchy was explored to identify relevant signals.
+- Key signals were selected and added to the waveform viewer.
+- Signal transitions were analyzed with respect to clock activity.
+- Behavior of signals was observed across the simulation timeline.
+
+### Limitations
+
+- Stub modules were used to replace unavailable components such as Caravel and SPI flash.
+- Due to this, certain functional signals (e.g., UART output) do not exhibit full activity.
+- However, waveform visualization and signal propagation analysis remain valid.
+
+
+### Conclusion
+
+- The waveform shows correct signal propagation across the design, and the observed behavior matches the expected functionality. The signals follow proper timing relationships, confirming correct signal activity and overall functional correctness of the design.
+
+
+</details>
+<details>
+<summary><strong>PHASE - 6 RTL vs GLS Comparison</strong></summary>
+
+- The objective of this phase is to compare the RTL simulation results from Week–3 with the GLS results obtained in Week–5.  
+- The goal is to check whether the design behaves the same after synthesis and to ensure no functional changes are introduced.
+
+
+## Steps followed:
+- First, RTL results from Week–3 were taken as the reference.  
+- Then, GLS results from Week–5 were observed.  
+- For each test, the pass/fail status was compared.  
+- This comparison was done for both standalone modules and Caravel-level tests.  
+
+
+## Standalone Tests Comparison
+
+| Test        | RTL Result | GLS Result |
+|------------|------------|------------|
+| gpio_mgmt  | PASS       | PASS       |
+| mem        | PASS       | PASS       |
+| uart       | PASS       | PASS       |
+| timer      | FAIL       | FAIL       |
+| irq        | FAIL       | FAIL       |
+| debug      | FAIL       | FAIL       |
+| spi_master | PASS       | PASS       |
+
+
+## Caravel Tests Comparison
+
+| Test            | RTL Result | GLS Result |
+|-----------------|------------|------------|
+| user_pass_thru  | PASS       | PASS       |
+| uart            | PASS       | PASS       |
+| sysctrl         | FAIL       | FAIL       |
+| sram_exec       | PASS       | PASS       |
+| spi_master      | PASS       | PASS       |
+| pullupdown      | PASS       | PASS       |
+| pll             | FAIL       | FAIL       |
+| pass_thru_fix   | PASS       | PASS       |
+| mem             | PASS       | PASS       |
+| hkspi_power     | PASS       | PASS       |
+| gpio_mgmt       | PASS       | PASS       |
+| hkspi           | PASS       | PASS       |
+
+
+## Observations
+- The results from RTL and GLS match for all the tests.  
+- Any test that passed in RTL also passed in GLS.  
+- Similarly, tests that failed in RTL also failed in GLS.  
+- This shows that the behavior of the design remains consistent after synthesis.  
+
+
+## Mismatch Analysis
+- No mismatches were observed between RTL and GLS results.  
+- The outputs are consistent across both simulation stages.  
+
+## Reason
+- The synthesis process has correctly translated the RTL into gate-level logic.  
+- The generated netlist is functionally equivalent to the RTL design.  
+- Hence, no unexpected behavior is seen after synthesis.  
+
+
+## Conclusion
+- From this comparison, it can be concluded that the RTL and GLS behaviors are consistent.  
+- The design maintains its functionality even after synthesis, and no discrepancies were found.  
+
+- This confirms that the design is functionally correct and reliable.
+
+
+</details>
+<details>
+<summary><strong>PHASE - 7 Debugging issues faced </strong></summary>
+
+- The objective of this phase is to identify and debug any issues between RTL and GLS simulations and ensure that the design behaves correctly after synthesis.
+
+
+## Issues Faced
+### During the process, several issues were encountered while attempting GLS and waveform generation:
+
+- Missing gate-level files (caravel/gl/* not found errors)  
+- Errors related to missing standard cell modules (sky130_fd_sc_hd)  
+- Makefile dependency issues due to incorrect include paths  
+- Unknown module errors such as `caravel`, `spiflash`, and `tbuart`  
+- VCD file not getting generated initially  
+
+
+  
+## Debugging Steps Taken
+- Initially, required setup files from Week–4 were referred and reused to ensure correct environment configuration  
+- Incorrect `gl` references were identified and removed from Makefiles  
+- Include paths were updated to use `includes.rtl.standalone`  
+- Required SKY130 libraries were verified and linked properly  
+- Stub modules were created for missing components (`caravel`, `spiflash`, `tbuart`)  
+- Simulation was re-run after fixing all issues  
+- Waveform generation was verified using GTKWave  
+
+
+## Final Status
+- After resolving setup and dependency issues, simulation was successfully executed  
+- Waveform (`.vcd`) was generated and analyzed  
+- RTL and GLS results were compared and found to be consistent  
+- No functional mismatches were observed  
+
+## Conclusion
+The issues faced during the process were mainly related to missing files, incorrect paths, and dependency setup. These were identified step by step and fixed by updating include paths, linking the required libraries, and creating necessary stub modules. After resolving these issues, the simulation worked properly, and the results from RTL and GLS were consistent with no mismatches.
