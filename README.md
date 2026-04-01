@@ -2938,3 +2938,99 @@ Therefore, validation was performed by:
 
 ## Conclusion
 The issues faced during the process were mainly related to missing files, incorrect paths, and dependency setup. These were identified step by step and fixed by updating include paths, linking the required libraries, and creating necessary stub modules. After resolving these issues, the simulation worked properly, and the results from RTL and GLS were consistent with no mismatches.
+
+
+
+
+
+
+
+</details>
+
+
+---
+
+</details>
+
+## WEEK-6 Independent Block Implementation + Gate-Level Validation
+
+</details>
+<details>
+<summary><strong>PHASE - 1 Block Selection and Analysis</strong></summary>
+
+## Objective
+The objective of this phase is to select a suitable RTL block and understand its structure, inputs/outputs, hierarchy, and dependencies.
+
+<img width="1184" height="403" alt="all blocks week6" src="https://github.com/user-attachments/assets/ad3656ca-6885-4ebf-9b56-786f2d30a4fb" />
+
+
+## Block Selection
+The RTL directory was explored and the following blocks were checked:
+- clock_div
+- simple_por
+
+<img width="1038" height="116" alt="simple block " src="https://github.com/user-attachments/assets/ec365f0c-8dba-407b-96b9-6b37e1c7fce0" />
+
+
+The `clock_div` block contains multiple modules (clock_div, odd, even), so it was not selected.
+
+The `simple_por` block contains a single module, so it was chosen for further analysis.
+
+
+
+
+## RTL Analysis
+
+### Top Module
+- simple_por
+  
+<img width="979" height="72" alt="simple por mod" src="https://github.com/user-attachments/assets/f9682d9c-83bd-4702-a0d3-ddd181771fbc" />
+
+### Inputs and Outputs
+From RTL inspection:
+
+**Outputs:**
+- porb_h  
+- porb_l  
+- por_l  
+
+**Inputs:**
+- No explicit inputs defined in the original RTL
+
+<img width="1052" height="96" alt="i:o simple v" src="https://github.com/user-attachments/assets/ccc555a9-00f6-4320-87c6-80fd02860f71" />
+
+
+## Issue Identified
+The following was observed in the RTL:
+
+- Uses sky130_fd_sc_hvl cells  
+- These are not supported in standard ORFS flow  
+
+
+## Final Block Used
+To proceed with implementation, a clean version was created:
+
+- Removed unsupported cells  
+- Simplified the logic  
+
+Final block used:
+- simple_por_clean
+
+
+## Internal Hierarchy
+- Single module design  
+- No submodules  
+- Flat structure  
+
+
+## RTL Dependencies
+- No external RTL dependencies in clean version  
+
+
+## Conclusion
+- Explored multiple blocks  
+- Identified issues in original RTL  
+- Selected a clean and synthesizable block  
+- Ready for implementation  
+
+
