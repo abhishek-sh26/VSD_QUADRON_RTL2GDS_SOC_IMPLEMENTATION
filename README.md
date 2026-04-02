@@ -3278,3 +3278,47 @@ All required implementation outputs were successfully generated and verified. Th
 
 
 
+</details>
+<details>
+<summary><strong>PHASE - 5 Waveform Validation</strong></summary>
+
+## Task Execution
+
+- The waveform file (`wave.vcd`) was generated during Gate-Level Simulation
+
+ <img width="432" height="53" alt="sim ls" src="https://github.com/user-attachments/assets/09f343f9-8155-4397-a485-c1e22a485507" />
+
+- The waveform was opened using GTKWave
+
+      gtkwave wave.vcd
+  
+  <img width="1234" height="768" alt="gtk wave " src="https://github.com/user-attachments/assets/380adf1d-a0b2-4f74-acef-a92c19f61737" />
+
+- Gate-level signal activity was observed and analyzed  
+
+
+## Waveform Observation
+
+The following key signals were analyzed:
+
+### 1. Clock Signal (`clk`)
+- The clock signal toggles continuously  
+- It drives the timing of the design  
+
+### 2. Input Signal (`porb`)
+- Initially set to 0 and later changes to 1  
+- Acts as input stimulus to the design  
+
+### 3. Output Signal (`porb_level`)
+- Follows the behavior of the input signal  
+- Confirms correct functionality of the design  
+
+
+## Result
+
+- Waveform was successfully generated and visualized  
+- Signal transitions match expected behavior  
+- Design functionality is verified at gate level  
+
+
+
