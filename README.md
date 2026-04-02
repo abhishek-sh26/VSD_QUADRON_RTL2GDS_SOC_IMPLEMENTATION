@@ -1,4 +1,4 @@
-# VSD_QUADRON_RTL2GDS_SOC_IMPLEMENTATION
+<img width="955" height="78" alt="i verilog " src="https://github.com/user-attachments/assets/232e7679-8863-4f4a-a035-6e7c71a67a47" /># VSD_QUADRON_RTL2GDS_SOC_IMPLEMENTATION
 
 
  
@@ -2968,8 +2968,7 @@ The issues faced during the process were mainly related to missing files, incorr
 <details>
 <summary><strong>PHASE - 1 Block Selection and Analysis</strong></summary>
 
-## Objective
-The objective of this phase is to select a suitable RTL block and understand its structure, inputs/outputs, hierarchy, and dependencies.
+- The objective of this phase is to select a suitable RTL block and understand its structure, inputs/outputs, hierarchy, and dependencies.
 
 <img width="1184" height="403" alt="all blocks week6" src="https://github.com/user-attachments/assets/ad3656ca-6885-4ebf-9b56-786f2d30a4fb" />
 
@@ -3048,8 +3047,7 @@ Final block used:
 <details>
 <summary><strong>PHASE - 2 RTL-to-GDS Implementation</strong></summary>
 
-## Objective
-The objective of this phase is to implement the selected RTL block from RTL to GDS using ORFS flow.
+- The objective of this phase is to implement the selected RTL block from RTL to GDS using ORFS flow.
 
 
 ## Setup
@@ -3146,6 +3144,137 @@ All outputs are available in the following directory:
 - 6_final.gds → Final GDSII file  
 
 
-## Conclusion
+### Conclusion
 The RTL-to-GDS flow was successfully executed for the selected block. All stages completed without errors, and the final GDS file was generated, confirming successful implementation.
+
+
+</details>
+<details>
+<summary><strong>PHASE - 3 Generation of Implementation Outputs</strong></summary>
+
+- The objective of this phase is to collect and analyze all the implementation outputs generated after the RTL-to-GDS flow.
+
+### Output Files Collected
+
+All the generated outputs are available in the following directory:
+
+
+	/home/abhishek/Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/simple_por/base
+
+<img width="1104" height="247" alt="o:p files " src="https://github.com/user-attachments/assets/6ce35b86-4545-44aa-87e2-d08d87536c10" />
+
+
+### Synthesized Netlist (Post-Synthesis)
+- File: `1_2_yosys.v`
+- Description:  
+  This is the netlist generated after synthesis, where RTL is converted into gate-level representation.
+
+<img width="1056" height="269" alt="synth netlist" src="https://github.com/user-attachments/assets/927c9462-043a-4ef7-bf1a-6a594ad6cc3e" />
+
+
+
+### Final Netlist (Post-Routing)
+- File: `6_final.v`
+- Description:  
+  This is the final gate-level netlist after placement, CTS, and routing.
+
+<img width="1062" height="275" alt="final netlist " src="https://github.com/user-attachments/assets/48a8419f-a25b-4465-a6f6-8b1b3f1833d1" />
+
+
+
+### DEF / Database (Physical Layout)
+- File: `6_final.def`
+- Description:  
+  This file represents the physical placement and routing information of the design.
+
+<img width="1053" height="273" alt="DEF " src="https://github.com/user-attachments/assets/b7a48ca5-5511-4e5e-9f79-cc35a3757435" />
+
+
+
+### Filled Database (Signoff Ready)
+- File: `6_1_fill.odb`
+- Description:  
+  This database includes fill cells added for manufacturing requirements.
+
+<img width="1029" height="126" alt="fill cell " src="https://github.com/user-attachments/assets/af31ba54-ab9c-4f02-a69e-5b8049085124" />
+
+
+
+### GDSII (Final Layout)
+- File: `6_final.gds`
+- Description:  
+  This is the final layout file used for fabrication.
+
+      klayout 6_final.gds
+
+<img width="1235" height="768" alt="simple por gds " src="https://github.com/user-attachments/assets/dd6e7217-c613-4947-a349-2b4ecf318815" />
+
+
+
+### Timing Report
+- File: `6_report.log`
+- Description:  
+  Contains timing analysis information at the target clock frequency.
+
+### The selected design is a combinational block without any flip-flops or registers. Since timing analysis requires clocked paths, no timing paths are present in this design. Therefore, slack values are not generated, which is expected for this type of design.
+
+
+## Conclusion
+All required implementation outputs were successfully generated and verified. The design has completed the full RTL-to-GDS flow and is ready for further validation.
+
+
+</details>
+<details>
+<summary><strong>PHASE - 4 Gate-Level Simulation (GLS)</strong></summary>
+
+- The objective of this phase is to verify the functionality of the design using the generated gate-level netlist after synthesis and routing.
+
+
+### Setup
+- The final gate-level netlist (`6_final.v`) was used for simulation  
+- Standard cell library files (`sky130_fd_sc_hd.v` and `primitives.v`) were included  
+- A testbench (`tb.v`) was created to apply input stimulus and observe outputs  
+
+       mkdir -p ~/Desktop/week6_gls
+       cd ~/Desktop/week6_gls
+
+       cp ~/Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/simple_por/base/6_final.v .
+
+
+### Simulation Flow
+- The gate-level netlist was integrated into the simulation environment  
+- Compilation was performed using `iverilog`
+	
+	  iverilog -o gl.vvp tb.v 6_final.v \
+	  /home/abhishek/.volare/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v \
+	  /home/abhishek/.volare/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v
+  
+
+  <img width="955" height="78" alt="i verilog " src="https://github.com/user-attachments/assets/33b97dc4-3f72-42ce-a252-a1fd479a0721" />
+
+  
+- Simulation was executed using `vvp`
+
+      vvp gl.vvp
+  
+  <img width="742" height="73" alt="week 6 vvp " src="https://github.com/user-attachments/assets/9c29e135-5d47-4916-94f5-824ec2661670" />
+
+
+- A waveform file (`wave.vcd`) was generated for analysis  
+
+     
+### Execution Status
+
+- GLS executed successfully without errors  
+- Waveform file (`wave.vcd`) was generated  
+
+
+### Result
+
+- Simulation completed successfully  
+- Output behavior matched expected functional operation
+
+## The gate-level netlist was successfully integrated into the simulation flow and executed using the modified setup. The simulation completed without any errors, and the generated waveform confirmed that the design behaves as expected. This verifies that the functionality is preserved after synthesis and routing.
+
+
 
