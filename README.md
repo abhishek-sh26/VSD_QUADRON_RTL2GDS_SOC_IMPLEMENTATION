@@ -541,27 +541,37 @@ cd yosys
 
 
 ## After successfully installing ORFS and OpenROAD in the local Ubuntu environment, the same testcase used in the cloud environment was executed locally to verify the RTL-to-GDS flow.
+
 ### Step 1 — Navigate to ORFS flow Directory
-cd vsd-scl180-orfs/orfs/flow
+
+    cd vsd-scl180-orfs/orfs/flow
+
 ### Step 2 — Run RTL-to-GDS Flow
+
 #### Made some changes for getting error:
+
 -sed -i '/pin.*GCLK/a \        function : "(GATE * CLK)";' /home/abhishek/Desktop/vsd-scl180-orfs/orfs/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
 #### verify the changes made using grep
 - grep -iB 1 "function.*GATE" /home/abhishek/Desktop/vsd-scl180-orfs/orfs/flow/platforms/sky130hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib | grep “GCLK"
+  
   <img width="1206" height="308" alt="Screenshot 2026-03-08 at 8 44 49 PM" src="https://github.com/user-attachments/assets/de7d6ead-91fa-415f-807f-372e83449a18" />
+  
  ## Execute the complete flow using the Makefile:
-### export OPENROAD_EXE=/home/abhishek/Desktop/OpenROAD/build/bin/openroad
-### export PLATFORM=sky130hd
-### export DESIGN=riscv32i
-### make clean_issues
+	 export OPENROAD_EXE=/home/abhishek/Desktop/OpenROAD/build/bin/openroad
+	 export PLATFORM=sky130hd
+	 export DESIGN=riscv32i
+	 make clean_issues
 ## Run the flow RTL2GDS with the make command 
-### make PLATFORM=sky130hd DESIGN=riscv32i
+	 make PLATFORM=sky130hd DESIGN=riscv32i
 
 ## make successfully finished 
+
 <img width="993" height="203" alt="make success logs OR codespace" src="https://github.com/user-attachments/assets/271ba668-d123-4251-91e6-6b91b102bb8c" />
 
 
 ## The final Klayout veiw of the final.gds
+
 <img width="1034" height="42" alt="Screenshot 2026-03-08 at 11 59 18 PM" src="https://github.com/user-attachments/assets/4f828aad-4214-48aa-aa41-490c06777567" />
 
 <img width="1218" height="768" alt="Screenshot 2026-03-08 at 11 56 44 PM" src="https://github.com/user-attachments/assets/d73b6dbf-5854-46bb-bd01-74a6e4560bcb" />
@@ -3033,4 +3043,109 @@ Final block used:
 - Selected a clean and synthesizable block  
 - Ready for implementation  
 
+
+</details>
+<details>
+<summary><strong>PHASE - 2 RTL-to-GDS Implementation</strong></summary>
+
+## Objective
+The objective of this phase is to implement the selected RTL block from RTL to GDS using ORFS flow.
+
+
+## Setup
+- Created a design directory for the selected block `simple_por`
+- Added the RTL file `simple_por_clean.v` into the RTL folder
+- Created a `config.mk` file for design configuration
+- Created an SDC file to define the clock constraint
+
+
+## RTL Organization
+The RTL file was organized as follows:
+
+- Path:
+
+      designs/sky130hd/simple_por/rtl/simple_por_clean.v
+
+- The design is self-contained and does not require any additional RTL dependencies
+
+
+## Clock Constraint
+- Clock constraint was defined using an SDC file
+- Clock frequency assumed: 100 MHz (10 ns period)
+
+
+## Flow Execution
+The complete RTL-to-GDS flow was executed using the following command:
+
+    make DESIGN_CONFIG=./designs/sky130hd/simple_por/config.mk
+
+
+<img width="744" height="489" alt="sim por done " src="https://github.com/user-attachments/assets/d314f760-a7a2-4d7c-a5c2-867de941384f" />
+
+
+## Implementation Flow
+
+The design passed through the following stages:
+
+- Synthesis  
+  RTL was converted into a gate-level netlist
+
+<img width="1122" height="137" alt="synth run " src="https://github.com/user-attachments/assets/641f2dc0-782f-4086-8437-f5d3d8edf29a" />
+
+
+- Floorplan  
+  Die area and core area were defined
+
+<img width="941" height="134" alt="floorplan run " src="https://github.com/user-attachments/assets/2f32d183-3502-40da-b2e0-e99c9957a256" />
+
+
+- Placement  
+  Standard cells were placed in the layout
+
+  
+<img width="937" height="121" alt="place run " src="https://github.com/user-attachments/assets/dd61db82-9128-40a2-80f0-f89f1ac221f3" />
+
+- Clock Tree Synthesis (CTS)  
+  Clock network was generated  
+
+<img width="947" height="150" alt="cts run " src="https://github.com/user-attachments/assets/acfc3f3d-5006-444c-ba68-af4820e11def" />
+
+
+- Routing  
+  Signal routing was completed  
+
+<img width="951" height="260" alt="route run " src="https://github.com/user-attachments/assets/fea15e68-4077-4c40-af70-06504cc73b13" />
+
+
+- Final GDS 
+  
+		/home/abhishek/Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/simple_por/base
+		klayout 6_final.gds
+  
+<img width="1235" height="768" alt="simple por gds " src="https://github.com/user-attachments/assets/db3d2f97-cad7-4f7f-9e68-bc5c5821a720" />
+
+## Results
+- Synthesis completed successfully  
+- Floorplan generated  
+- Placement completed  
+- CTS completed  
+- Routing completed  
+- Final GDS file generated  
+
+
+## Output Files Generated
+
+All outputs are available in the following directory:
+
+	/home/abhishek/Desktop/vsd-scl180-orfs/orfs/flow/results/sky130hd/simple_por/base
+
+## Important generated files:
+
+- 6_final.v → Gate-level netlist  
+- 6_final.def → Physical layout (DEF)  
+- 6_final.gds → Final GDSII file  
+
+
+## Conclusion
+The RTL-to-GDS flow was successfully executed for the selected block. All stages completed without errors, and the final GDS file was generated, confirming successful implementation.
 
