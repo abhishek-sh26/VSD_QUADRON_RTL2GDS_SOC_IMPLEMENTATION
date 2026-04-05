@@ -3321,4 +3321,70 @@ The following key signals were analyzed:
 - Design functionality is verified at gate level  
 
 
+</details>
+<details>
+<summary><strong>PHASE - 6 RTL vs GLS Validation</strong></summary>
+
+## Task Execution
+
+- The functionality of the RTL design was validated against the Gate-Level Simulation (GLS) results  
+- Output signals observed in GTKWave were compared with expected RTL behavior  
+
+
+## Observation
+
+- The GLS waveform shows correct signal transitions as defined in the testbench  
+- The output (`porb_level`) responds correctly to the input stimulus (`porb`)  
+- No unexpected glitches or mismatches were observed during simulation  
+
+
+## Result
+
+- The functional behavior of the design is preserved after synthesis and routing  
+- RTL and GLS results are consistent with each other  
+
+
+## Conclusion
+
+The validation confirms that the implementation flow has maintained design correctness, and there is no functional deviation between RTL and gate-level simulation.
+
+</details>
+<details>
+<summary><strong>PHASE - 7 Debugging and Insights</strong></summary>
+
+## Issues Faced
+
+- Initial block selection (`simple_por`) contained unsupported `sky130_fd_sc_hvl` cells, causing synthesis failure  
+- Missing SDC file and incorrect floorplan parameters caused errors during early flow stages  
+- Errors in RTL (syntax issues and undefined macros) interrupted synthesis  
+- OpenROAD GUI was not available, making it difficult to visualize intermediate layout stages  
+- Gate-Level Simulation (GLS) failed initially due to missing UDP primitive definitions  
+- Path and directory confusion while accessing logs and results  
+
+
+
+## Debugging Steps Taken
+
+- Switched to a clean version of the design (`simple_por_clean`) by removing unsupported cells  
+- Fixed RTL issues and ensured compatibility with ORFS flow  
+- Corrected floorplan parameters and ensured proper constraint handling  
+- Carefully verified and corrected file paths for logs and results  
+- Resolved GLS errors by including `primitives.v` along with `sky130_fd_sc_hd.v`  
+- Used KLayout to visualize final layout in absence of OpenROAD GUI  
+- Validated each stage step-by-step instead of running the full flow blindly  
+
+
+## Key Learnings
+
+- Importance of selecting a compatible and simple RTL block for smooth flow execution  
+- Clear understanding of RTL-to-GDS flow stages (synthesis, floorplan, placement, CTS, routing)  
+- Difference between combinational and sequential designs and their impact on timing analysis  
+- Proper inclusion of standard cell libraries is critical for successful GLS  
+- Debugging is an essential part of VLSI flow and requires careful observation of logs  
+- Step-by-step verification helps in identifying and resolving issues efficiently  
+
+
+## Conclusion
+
+Throughout the complete RTL-to-GDS implementation and validation process, multiple practical challenges were encountered and resolved. This provided a strong understanding of the design flow, debugging techniques, and tool usage, ensuring successful completion of the project.
 
