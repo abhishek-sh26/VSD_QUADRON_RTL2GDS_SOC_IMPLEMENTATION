@@ -1,4 +1,4 @@
-<img width="955" height="78" alt="i verilog " src="https://github.com/user-attachments/assets/232e7679-8863-4f4a-a035-6e7c71a67a47" /># VSD_QUADRON_RTL2GDS_SOC_IMPLEMENTATION
+# VSD_QUADRON_RTL2GDS_SOC_IMPLEMENTATION
 
 
  
